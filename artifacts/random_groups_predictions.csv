@@ -1,0 +1,421 @@
+﻿model,group#,set#,teama_players,teamb_players,who_wins,winning_players,team_a_win_probability,team_b_win_probability,cold_start_players
+R-GCN,1,1,Azure Falcon (P0027) + Bronze Eagle (P0016),Ruby Kestrel (P0031) + Ruby Robin (P0022),Team B,Ruby Kestrel (P0031) + Ruby Robin (P0022),0.09721879661083221,0.9027812033891678,
+R-GCN,1,2,Azure Falcon (P0027) + Ruby Kestrel (P0031),Bronze Eagle (P0016) + Ruby Robin (P0022),Team A,Azure Falcon (P0027) + Ruby Kestrel (P0031),0.9889677166938782,0.01103228330612183,
+R-GCN,1,3,Azure Falcon (P0027) + Ruby Robin (P0022),Bronze Eagle (P0016) + Ruby Kestrel (P0031),Team A,Azure Falcon (P0027) + Ruby Robin (P0022),0.5977861881256104,0.4022138118743896,
+R-GCN,2,1,Lilac Raven (P0048) + Amber Raven (P0071),Coral Panda (P0010) + Jade Heron (P0090),Team A,Lilac Raven (P0048) + Amber Raven (P0071),0.7200525999069214,0.2799474000930786,
+R-GCN,2,2,Lilac Raven (P0048) + Coral Panda (P0010),Amber Raven (P0071) + Jade Heron (P0090),Team B,Amber Raven (P0071) + Jade Heron (P0090),0.03799495100975037,0.9620050489902496,
+R-GCN,2,3,Lilac Raven (P0048) + Jade Heron (P0090),Amber Raven (P0071) + Coral Panda (P0010),Team B,Amber Raven (P0071) + Coral Panda (P0010),0.07358323037624359,0.9264167696237564,
+R-GCN,3,1,Violet Raven (P0017) + Lilac Panda (P0108),Azure Robin (P0042) + Olive Fox (P0091),Team B,Azure Robin (P0042) + Olive Fox (P0091),0.2160256952047348,0.7839743047952652,
+R-GCN,3,2,Violet Raven (P0017) + Azure Robin (P0042),Lilac Panda (P0108) + Olive Fox (P0091),Team B,Lilac Panda (P0108) + Olive Fox (P0091),0.4477532505989075,0.5522467494010925,
+R-GCN,3,3,Violet Raven (P0017) + Olive Fox (P0091),Lilac Panda (P0108) + Azure Robin (P0042),Team A,Violet Raven (P0017) + Olive Fox (P0091),0.6796138882637024,0.3203861117362976,
+R-GCN,4,1,Violet Panda (P0063) + Ruby Dolphin (P0080),Olive Panda (P0066) + Ivory Falcon (P0067),Team A,Violet Panda (P0063) + Ruby Dolphin (P0080),0.6757067441940308,0.3242932558059692,
+R-GCN,4,2,Violet Panda (P0063) + Olive Panda (P0066),Ruby Dolphin (P0080) + Ivory Falcon (P0067),Team A,Violet Panda (P0063) + Olive Panda (P0066),0.5966213941574097,0.4033786058425903,
+R-GCN,4,3,Violet Panda (P0063) + Ivory Falcon (P0067),Ruby Dolphin (P0080) + Olive Panda (P0066),Team B,Ruby Dolphin (P0080) + Olive Panda (P0066),0.03122625127434731,0.9687737487256527,
+R-GCN,5,1,Ruby Otter (P0002) + Lilac Robin (P0052),Indigo Lynx (P0088) + Crimson Jaguar (P0074),Team B,Indigo Lynx (P0088) + Crimson Jaguar (P0074),0.4192155599594116,0.5807844400405884,
+R-GCN,5,2,Ruby Otter (P0002) + Indigo Lynx (P0088),Lilac Robin (P0052) + Crimson Jaguar (P0074),Team A,Ruby Otter (P0002) + Indigo Lynx (P0088),0.8899486660957336,0.1100513339042664,
+R-GCN,5,3,Ruby Otter (P0002) + Crimson Jaguar (P0074),Lilac Robin (P0052) + Indigo Lynx (P0088),Team A,Ruby Otter (P0002) + Crimson Jaguar (P0074),0.8458583354949951,0.1541416645050049,
+R-GCN,6,1,Emerald Owl (P0039) + Coral Kestrel (P0009),Olive Heron (P0051) + Emerald Panda (P0047),Team A,Emerald Owl (P0039) + Coral Kestrel (P0009),0.7822222709655762,0.2177777290344238,P0039
+R-GCN,6,2,Emerald Owl (P0039) + Olive Heron (P0051),Coral Kestrel (P0009) + Emerald Panda (P0047),Team A,Emerald Owl (P0039) + Olive Heron (P0051),0.9118303060531616,0.08816969394683838,P0039
+R-GCN,6,3,Emerald Owl (P0039) + Emerald Panda (P0047),Coral Kestrel (P0009) + Olive Heron (P0051),Team B,Coral Kestrel (P0009) + Olive Heron (P0051),0.001168387359939516,0.9988316126400605,P0039
+R-GCN,7,1,Amber Robin (P0103) + Bronze Falcon (P0062),Bronze Owl (P0083) + Bronze Fox (P0033),Team B,Bronze Owl (P0083) + Bronze Fox (P0033),0.07971503585577011,0.9202849641442299,P0062
+R-GCN,7,2,Amber Robin (P0103) + Bronze Owl (P0083),Bronze Falcon (P0062) + Bronze Fox (P0033),Team A,Amber Robin (P0103) + Bronze Owl (P0083),0.9456313848495483,0.05436861515045166,P0062
+R-GCN,7,3,Amber Robin (P0103) + Bronze Fox (P0033),Bronze Falcon (P0062) + Bronze Owl (P0083),Team A,Amber Robin (P0103) + Bronze Fox (P0033),0.6187037229537964,0.3812962770462036,P0062
+R-GCN,8,1,Teal Owl (P0073) + Coral Finch (P0079),Teal Fox (P0075) + Azure Raven (P0086),Team A,Teal Owl (P0073) + Coral Finch (P0079),0.9888462424278259,0.01115375757217407,
+R-GCN,8,2,Teal Owl (P0073) + Teal Fox (P0075),Coral Finch (P0079) + Azure Raven (P0086),Team A,Teal Owl (P0073) + Teal Fox (P0075),0.9104578495025635,0.08954215049743652,
+R-GCN,8,3,Teal Owl (P0073) + Azure Raven (P0086),Coral Finch (P0079) + Teal Fox (P0075),Team A,Teal Owl (P0073) + Azure Raven (P0086),0.9874951243400574,0.01250487565994263,
+R-GCN,9,1,Bronze Dolphin (P0056) + Violet Badger (P0089),Jade Kestrel (P0023) + Jade Fox (P0038),Team B,Jade Kestrel (P0023) + Jade Fox (P0038),0.05046282708644867,0.9495371729135513,
+R-GCN,9,2,Bronze Dolphin (P0056) + Jade Kestrel (P0023),Violet Badger (P0089) + Jade Fox (P0038),Team A,Bronze Dolphin (P0056) + Jade Kestrel (P0023),0.9059534668922424,0.09404653310775757,
+R-GCN,9,3,Bronze Dolphin (P0056) + Jade Fox (P0038),Violet Badger (P0089) + Jade Kestrel (P0023),Team A,Bronze Dolphin (P0056) + Jade Fox (P0038),0.6493536829948425,0.3506463170051575,
+R-GCN,10,1,Indigo Owl (P0011) + Bronze Kestrel (P0053),Ruby Fox (P0093) + Amber Jaguar (P0106),Team A,Indigo Owl (P0011) + Bronze Kestrel (P0053),0.6164530515670776,0.3835469484329224,
+R-GCN,10,2,Indigo Owl (P0011) + Ruby Fox (P0093),Bronze Kestrel (P0053) + Amber Jaguar (P0106),Team A,Indigo Owl (P0011) + Ruby Fox (P0093),0.998504638671875,0.001495361328125,
+R-GCN,10,3,Indigo Owl (P0011) + Amber Jaguar (P0106),Bronze Kestrel (P0053) + Ruby Fox (P0093),Team B,Bronze Kestrel (P0053) + Ruby Fox (P0093),0.2545357048511505,0.7454642951488495,
+R-GCN,11,1,Jade Crane (P0061) + Azure Badger (P0007),Olive Robin (P0050) + Jade Jaguar (P0064),Team A,Jade Crane (P0061) + Azure Badger (P0007),0.8656373023986816,0.1343626976013184,
+R-GCN,11,2,Jade Crane (P0061) + Olive Robin (P0050),Azure Badger (P0007) + Jade Jaguar (P0064),Team A,Jade Crane (P0061) + Olive Robin (P0050),0.7355728149414062,0.2644271850585938,
+R-GCN,11,3,Jade Crane (P0061) + Jade Jaguar (P0064),Azure Badger (P0007) + Olive Robin (P0050),Team A,Jade Crane (P0061) + Jade Jaguar (P0064),0.7982838749885559,0.2017161250114441,
+R-GCN,12,1,Golden Dolphin (P0057) + Silver Fox (P0112),Emerald Jaguar (P0043) + Bronze Panda (P0003),Team A,Golden Dolphin (P0057) + Silver Fox (P0112),0.525009274482727,0.4749907255172729,
+R-GCN,12,2,Golden Dolphin (P0057) + Emerald Jaguar (P0043),Silver Fox (P0112) + Bronze Panda (P0003),Team A,Golden Dolphin (P0057) + Emerald Jaguar (P0043),0.8994899392127991,0.1005100607872009,
+R-GCN,12,3,Golden Dolphin (P0057) + Bronze Panda (P0003),Silver Fox (P0112) + Emerald Jaguar (P0043),Team A,Golden Dolphin (P0057) + Bronze Panda (P0003),0.6284642219543457,0.3715357780456543,
+R-GCN,13,1,Coral Jaguar (P0097) + Crimson Robin (P0068),Lilac Finch (P0069) + Emerald Fox (P0037),Team B,Lilac Finch (P0069) + Emerald Fox (P0037),0.2223965227603912,0.7776034772396088,P0037
+R-GCN,13,2,Coral Jaguar (P0097) + Lilac Finch (P0069),Crimson Robin (P0068) + Emerald Fox (P0037),Team A,Coral Jaguar (P0097) + Lilac Finch (P0069),0.9403653144836426,0.05963468551635742,P0037
+R-GCN,13,3,Coral Jaguar (P0097) + Emerald Fox (P0037),Crimson Robin (P0068) + Lilac Finch (P0069),Team B,Crimson Robin (P0068) + Lilac Finch (P0069),0.2070962339639664,0.7929037660360336,P0037
+R-GCN,14,1,Indigo Jaguar (P0024) + Golden Kestrel (P0040),Golden Robin (P0041) + Golden Owl (P0085),Team A,Indigo Jaguar (P0024) + Golden Kestrel (P0040),0.9367454648017883,0.06325453519821167,
+R-GCN,14,2,Indigo Jaguar (P0024) + Golden Robin (P0041),Golden Kestrel (P0040) + Golden Owl (P0085),Team A,Indigo Jaguar (P0024) + Golden Robin (P0041),0.5358399748802185,0.4641600251197815,
+R-GCN,14,3,Indigo Jaguar (P0024) + Golden Owl (P0085),Golden Kestrel (P0040) + Golden Robin (P0041),Team A,Indigo Jaguar (P0024) + Golden Owl (P0085),0.5703254342079163,0.4296745657920837,
+R-GCN,15,1,Azure Dolphin (P0019) + Violet Crane (P0113),Ivory Finch (P0092) + Golden Eagle (P0025),Team B,Ivory Finch (P0092) + Golden Eagle (P0025),0.01831519976258278,0.9816848002374172,
+R-GCN,15,2,Azure Dolphin (P0019) + Ivory Finch (P0092),Violet Crane (P0113) + Golden Eagle (P0025),Team A,Azure Dolphin (P0019) + Ivory Finch (P0092),0.9453848600387573,0.05461513996124268,
+R-GCN,15,3,Azure Dolphin (P0019) + Golden Eagle (P0025),Violet Crane (P0113) + Ivory Finch (P0092),Team A,Azure Dolphin (P0019) + Golden Eagle (P0025),0.7429497241973877,0.2570502758026123,
+R-GCN,16,1,Emerald Crane (P0060) + Crimson Raven (P0008),Emerald Raven (P0035) + Ivory Badger (P0059),Team A,Emerald Crane (P0060) + Crimson Raven (P0008),0.9956352114677429,0.00436478853225708,
+R-GCN,16,2,Emerald Crane (P0060) + Emerald Raven (P0035),Crimson Raven (P0008) + Ivory Badger (P0059),Team B,Crimson Raven (P0008) + Ivory Badger (P0059),0.1763833165168762,0.8236166834831238,
+R-GCN,16,3,Emerald Crane (P0060) + Ivory Badger (P0059),Crimson Raven (P0008) + Emerald Raven (P0035),Team B,Crimson Raven (P0008) + Emerald Raven (P0035),0.4388274550437927,0.5611725449562073,
+R-GCN,17,1,Emerald Badger (P0006) + Azure Otter (P0034),Ruby Owl (P0045) + Amber Crane (P0046),Team A,Emerald Badger (P0006) + Azure Otter (P0034),0.9089147448539734,0.09108525514602661,
+R-GCN,17,2,Emerald Badger (P0006) + Ruby Owl (P0045),Azure Otter (P0034) + Amber Crane (P0046),Team A,Emerald Badger (P0006) + Ruby Owl (P0045),0.9943660497665405,0.005633950233459473,
+R-GCN,17,3,Emerald Badger (P0006) + Amber Crane (P0046),Azure Otter (P0034) + Ruby Owl (P0045),Team B,Azure Otter (P0034) + Ruby Owl (P0045),0.01249279920011759,0.9875072007998824,
+R-GCN,18,1,Amber Badger (P0013) + Ivory Fox (P0049),Amber Finch (P0102) + Crimson Falcon (P0104),Team A,Amber Badger (P0013) + Ivory Fox (P0049),0.9681305289268494,0.03186947107315063,
+R-GCN,18,2,Amber Badger (P0013) + Amber Finch (P0102),Ivory Fox (P0049) + Crimson Falcon (P0104),Team B,Ivory Fox (P0049) + Crimson Falcon (P0104),0.1718416512012482,0.8281583487987518,
+R-GCN,18,3,Amber Badger (P0013) + Crimson Falcon (P0104),Ivory Fox (P0049) + Amber Finch (P0102),Team B,Ivory Fox (P0049) + Amber Finch (P0102),0.1946931928396225,0.8053068071603775,
+R-GCN,19,1,Bronze Finch (P0077) + Emerald Falcon (P0094),Coral Robin (P0020) + Amber Otter (P0081),Team B,Coral Robin (P0020) + Amber Otter (P0081),0.003031112952157855,0.9969688870478421,
+R-GCN,19,2,Bronze Finch (P0077) + Coral Robin (P0020),Emerald Falcon (P0094) + Amber Otter (P0081),Team B,Emerald Falcon (P0094) + Amber Otter (P0081),0.0704616829752922,0.9295383170247078,
+R-GCN,19,3,Bronze Finch (P0077) + Amber Otter (P0081),Emerald Falcon (P0094) + Coral Robin (P0020),Team B,Emerald Falcon (P0094) + Coral Robin (P0020),0.02806060761213303,0.971939392387867,
+R-GCN,20,1,Lilac Lynx (P0044) + Lilac Badger (P0098),Ivory Panda (P0021) + Coral Falcon (P0001),Team B,Ivory Panda (P0021) + Coral Falcon (P0001),0.2808150053024292,0.7191849946975708,
+R-GCN,20,2,Lilac Lynx (P0044) + Ivory Panda (P0021),Lilac Badger (P0098) + Coral Falcon (P0001),Team B,Lilac Badger (P0098) + Coral Falcon (P0001),0.02413317374885082,0.9758668262511492,
+R-GCN,20,3,Lilac Lynx (P0044) + Coral Falcon (P0001),Lilac Badger (P0098) + Ivory Panda (P0021),Team A,Lilac Lynx (P0044) + Coral Falcon (P0001),0.7788888216018677,0.2211111783981323,
+R-GCN,21,1,Crimson Dolphin (P0109) + Emerald Dolphin (P0099),Azure Owl (P0058) + Jade Panda (P0107),Team A,Crimson Dolphin (P0109) + Emerald Dolphin (P0099),0.8770112991333008,0.1229887008666992,
+R-GCN,21,2,Crimson Dolphin (P0109) + Azure Owl (P0058),Emerald Dolphin (P0099) + Jade Panda (P0107),Team B,Emerald Dolphin (P0099) + Jade Panda (P0107),0.2433962225914001,0.7566037774085999,
+R-GCN,21,3,Crimson Dolphin (P0109) + Jade Panda (P0107),Emerald Dolphin (P0099) + Azure Owl (P0058),Team B,Emerald Dolphin (P0099) + Azure Owl (P0058),0.4992655515670776,0.5007344484329224,
+R-GCN,22,1,Jade Otter (P0054) + Olive Lynx (P0101),Lilac Owl (P0084) + Emerald Otter (P0026),Team A,Jade Otter (P0054) + Olive Lynx (P0101),0.6789093613624573,0.3210906386375427,P0026
+R-GCN,22,2,Jade Otter (P0054) + Lilac Owl (P0084),Olive Lynx (P0101) + Emerald Otter (P0026),Team B,Olive Lynx (P0101) + Emerald Otter (P0026),0.02709869295358658,0.9729013070464134,P0026
+R-GCN,22,3,Jade Otter (P0054) + Emerald Otter (P0026),Olive Lynx (P0101) + Lilac Owl (P0084),Team B,Olive Lynx (P0101) + Lilac Owl (P0084),0.06150287389755249,0.9384971261024475,P0026
+R-GCN,23,1,Indigo Kestrel (P0072) + Jade Owl (P0096),Golden Heron (P0078) + Ruby Crane (P0065),Team B,Golden Heron (P0078) + Ruby Crane (P0065),0.0283860806375742,0.9716139193624258,P0072
+R-GCN,23,2,Indigo Kestrel (P0072) + Golden Heron (P0078),Jade Owl (P0096) + Ruby Crane (P0065),Team A,Indigo Kestrel (P0072) + Golden Heron (P0078),0.9913725852966309,0.00862741470336914,P0072
+R-GCN,23,3,Indigo Kestrel (P0072) + Ruby Crane (P0065),Jade Owl (P0096) + Golden Heron (P0078),Team B,Jade Owl (P0096) + Golden Heron (P0078),0.04115714132785797,0.958842858672142,P0072
+R-GCN,24,1,Teal Falcon (P0030) + Ivory Raven (P0028),Lilac Crane (P0100) + Olive Badger (P0111),Team A,Teal Falcon (P0030) + Ivory Raven (P0028),0.9903725385665894,0.009627461433410645,
+R-GCN,24,2,Teal Falcon (P0030) + Lilac Crane (P0100),Ivory Raven (P0028) + Olive Badger (P0111),Team B,Ivory Raven (P0028) + Olive Badger (P0111),0.08756941556930542,0.9124305844306946,
+R-GCN,24,3,Teal Falcon (P0030) + Olive Badger (P0111),Ivory Raven (P0028) + Lilac Crane (P0100),Team B,Ivory Raven (P0028) + Lilac Crane (P0100),0.111467182636261,0.888532817363739,
+R-GCN,25,1,Amber Lynx (P0005) + Jade Badger (P0055),Emerald Kestrel (P0076) + Indigo Raven (P0012),Team A,Amber Lynx (P0005) + Jade Badger (P0055),0.7834751605987549,0.2165248394012451,
+R-GCN,25,2,Amber Lynx (P0005) + Emerald Kestrel (P0076),Jade Badger (P0055) + Indigo Raven (P0012),Team B,Jade Badger (P0055) + Indigo Raven (P0012),0.4274944067001343,0.5725055932998657,
+R-GCN,25,3,Amber Lynx (P0005) + Indigo Raven (P0012),Jade Badger (P0055) + Emerald Kestrel (P0076),Team B,Jade Badger (P0055) + Emerald Kestrel (P0076),0.1082089245319366,0.8917910754680634,
+R-GCN,26,1,Lilac Otter (P0070) + Silver Robin (P0105),Indigo Otter (P0087) + Silver Raven (P0014),Team A,Lilac Otter (P0070) + Silver Robin (P0105),0.9990567564964294,0.0009432435035705566,
+R-GCN,26,2,Lilac Otter (P0070) + Indigo Otter (P0087),Silver Robin (P0105) + Silver Raven (P0014),Team A,Lilac Otter (P0070) + Indigo Otter (P0087),0.9946603178977966,0.005339682102203369,
+R-GCN,26,3,Lilac Otter (P0070) + Silver Raven (P0014),Silver Robin (P0105) + Indigo Otter (P0087),Team A,Lilac Otter (P0070) + Silver Raven (P0014),0.6996580958366394,0.3003419041633606,
+R-GCN,27,1,Golden Jaguar (P0110) + Crimson Finch (P0018),Lilac Eagle (P0029) + Golden Falcon (P0032),Team A,Golden Jaguar (P0110) + Crimson Finch (P0018),0.9876357913017273,0.01236420869827271,P0032
+R-GCN,27,2,Golden Jaguar (P0110) + Lilac Eagle (P0029),Crimson Finch (P0018) + Golden Falcon (P0032),Team B,Crimson Finch (P0018) + Golden Falcon (P0032),0.268804520368576,0.731195479631424,P0032
+R-GCN,27,3,Golden Jaguar (P0110) + Golden Falcon (P0032),Crimson Finch (P0018) + Lilac Eagle (P0029),Team A,Golden Jaguar (P0110) + Golden Falcon (P0032),0.7857803702354431,0.2142196297645569,P0032
+R-GCN,28,1,Ruby Heron (P0036) + Ruby Falcon (P0095),Indigo Eagle (P0004) + Ivory Eagle (P0015),Team B,Indigo Eagle (P0004) + Ivory Eagle (P0015),0.03007775917649269,0.9699222408235073,P0095
+R-GCN,28,2,Ruby Heron (P0036) + Indigo Eagle (P0004),Ruby Falcon (P0095) + Ivory Eagle (P0015),Team B,Ruby Falcon (P0095) + Ivory Eagle (P0015),0.0278436690568924,0.9721563309431076,P0095
+R-GCN,28,3,Ruby Heron (P0036) + Ivory Eagle (P0015),Ruby Falcon (P0095) + Indigo Eagle (P0004),Team A,Ruby Heron (P0036) + Ivory Eagle (P0015),0.6449845433235168,0.3550154566764832,P0095
+GraphSAGE,1,1,Azure Falcon (P0027) + Bronze Eagle (P0016),Ruby Kestrel (P0031) + Ruby Robin (P0022),Team B,Ruby Kestrel (P0031) + Ruby Robin (P0022),0.2402596175670624,0.7597403824329376,
+GraphSAGE,1,2,Azure Falcon (P0027) + Ruby Kestrel (P0031),Bronze Eagle (P0016) + Ruby Robin (P0022),Team A,Azure Falcon (P0027) + Ruby Kestrel (P0031),0.9775943160057068,0.02240568399429321,
+GraphSAGE,1,3,Azure Falcon (P0027) + Ruby Robin (P0022),Bronze Eagle (P0016) + Ruby Kestrel (P0031),Team A,Azure Falcon (P0027) + Ruby Robin (P0022),0.691624104976654,0.3083758950233459,
+GraphSAGE,2,1,Lilac Raven (P0048) + Amber Raven (P0071),Coral Panda (P0010) + Jade Heron (P0090),Team A,Lilac Raven (P0048) + Amber Raven (P0071),0.6797803044319153,0.3202196955680847,
+GraphSAGE,2,2,Lilac Raven (P0048) + Coral Panda (P0010),Amber Raven (P0071) + Jade Heron (P0090),Team B,Amber Raven (P0071) + Jade Heron (P0090),0.06394052505493164,0.9360594749450684,
+GraphSAGE,2,3,Lilac Raven (P0048) + Jade Heron (P0090),Amber Raven (P0071) + Coral Panda (P0010),Team B,Amber Raven (P0071) + Coral Panda (P0010),0.08081888407468796,0.919181115925312,
+GraphSAGE,3,1,Violet Raven (P0017) + Lilac Panda (P0108),Azure Robin (P0042) + Olive Fox (P0091),Team B,Azure Robin (P0042) + Olive Fox (P0091),0.1842813789844513,0.8157186210155487,
+GraphSAGE,3,2,Violet Raven (P0017) + Azure Robin (P0042),Lilac Panda (P0108) + Olive Fox (P0091),Team B,Lilac Panda (P0108) + Olive Fox (P0091),0.3042069971561432,0.6957930028438568,
+GraphSAGE,3,3,Violet Raven (P0017) + Olive Fox (P0091),Lilac Panda (P0108) + Azure Robin (P0042),Team A,Violet Raven (P0017) + Olive Fox (P0091),0.772048830986023,0.2279511690139771,
+GraphSAGE,4,1,Violet Panda (P0063) + Ruby Dolphin (P0080),Olive Panda (P0066) + Ivory Falcon (P0067),Team A,Violet Panda (P0063) + Ruby Dolphin (P0080),0.6313663721084595,0.3686336278915405,
+GraphSAGE,4,2,Violet Panda (P0063) + Olive Panda (P0066),Ruby Dolphin (P0080) + Ivory Falcon (P0067),Team A,Violet Panda (P0063) + Olive Panda (P0066),0.660213053226471,0.3397869467735291,
+GraphSAGE,4,3,Violet Panda (P0063) + Ivory Falcon (P0067),Ruby Dolphin (P0080) + Olive Panda (P0066),Team B,Ruby Dolphin (P0080) + Olive Panda (P0066),0.03677204251289368,0.9632279574871063,
+GraphSAGE,5,1,Ruby Otter (P0002) + Lilac Robin (P0052),Indigo Lynx (P0088) + Crimson Jaguar (P0074),Team A,Ruby Otter (P0002) + Lilac Robin (P0052),0.5348351001739502,0.4651648998260498,
+GraphSAGE,5,2,Ruby Otter (P0002) + Indigo Lynx (P0088),Lilac Robin (P0052) + Crimson Jaguar (P0074),Team A,Ruby Otter (P0002) + Indigo Lynx (P0088),0.7908297777175903,0.2091702222824097,
+GraphSAGE,5,3,Ruby Otter (P0002) + Crimson Jaguar (P0074),Lilac Robin (P0052) + Indigo Lynx (P0088),Team A,Ruby Otter (P0002) + Crimson Jaguar (P0074),0.8641373515129089,0.1358626484870911,
+GraphSAGE,6,1,Emerald Owl (P0039) + Coral Kestrel (P0009),Olive Heron (P0051) + Emerald Panda (P0047),Team A,Emerald Owl (P0039) + Coral Kestrel (P0009),0.7099625468254089,0.2900374531745911,P0039
+GraphSAGE,6,2,Emerald Owl (P0039) + Olive Heron (P0051),Coral Kestrel (P0009) + Emerald Panda (P0047),Team A,Emerald Owl (P0039) + Olive Heron (P0051),0.9025629758834839,0.09743702411651611,P0039
+GraphSAGE,6,3,Emerald Owl (P0039) + Emerald Panda (P0047),Coral Kestrel (P0009) + Olive Heron (P0051),Team B,Coral Kestrel (P0009) + Olive Heron (P0051),0.00137144629843533,0.9986285537015647,P0039
+GraphSAGE,7,1,Amber Robin (P0103) + Bronze Falcon (P0062),Bronze Owl (P0083) + Bronze Fox (P0033),Team B,Bronze Owl (P0083) + Bronze Fox (P0033),0.1221265345811844,0.8778734654188156,P0062
+GraphSAGE,7,2,Amber Robin (P0103) + Bronze Owl (P0083),Bronze Falcon (P0062) + Bronze Fox (P0033),Team A,Amber Robin (P0103) + Bronze Owl (P0083),0.9461515545845032,0.05384844541549683,P0062
+GraphSAGE,7,3,Amber Robin (P0103) + Bronze Fox (P0033),Bronze Falcon (P0062) + Bronze Owl (P0083),Team A,Amber Robin (P0103) + Bronze Fox (P0033),0.7779397964477539,0.2220602035522461,P0062
+GraphSAGE,8,1,Teal Owl (P0073) + Coral Finch (P0079),Teal Fox (P0075) + Azure Raven (P0086),Team A,Teal Owl (P0073) + Coral Finch (P0079),0.9905169606208801,0.009483039379119873,
+GraphSAGE,8,2,Teal Owl (P0073) + Teal Fox (P0075),Coral Finch (P0079) + Azure Raven (P0086),Team A,Teal Owl (P0073) + Teal Fox (P0075),0.8888600468635559,0.1111399531364441,
+GraphSAGE,8,3,Teal Owl (P0073) + Azure Raven (P0086),Coral Finch (P0079) + Teal Fox (P0075),Team A,Teal Owl (P0073) + Azure Raven (P0086),0.9857916831970215,0.01420831680297852,
+GraphSAGE,9,1,Bronze Dolphin (P0056) + Violet Badger (P0089),Jade Kestrel (P0023) + Jade Fox (P0038),Team B,Jade Kestrel (P0023) + Jade Fox (P0038),0.03846947103738785,0.9615305289626122,
+GraphSAGE,9,2,Bronze Dolphin (P0056) + Jade Kestrel (P0023),Violet Badger (P0089) + Jade Fox (P0038),Team A,Bronze Dolphin (P0056) + Jade Kestrel (P0023),0.913581132888794,0.08641886711120605,
+GraphSAGE,9,3,Bronze Dolphin (P0056) + Jade Fox (P0038),Violet Badger (P0089) + Jade Kestrel (P0023),Team A,Bronze Dolphin (P0056) + Jade Fox (P0038),0.7186693549156189,0.2813306450843811,
+GraphSAGE,10,1,Indigo Owl (P0011) + Bronze Kestrel (P0053),Ruby Fox (P0093) + Amber Jaguar (P0106),Team A,Indigo Owl (P0011) + Bronze Kestrel (P0053),0.5173677802085876,0.4826322197914124,
+GraphSAGE,10,2,Indigo Owl (P0011) + Ruby Fox (P0093),Bronze Kestrel (P0053) + Amber Jaguar (P0106),Team A,Indigo Owl (P0011) + Ruby Fox (P0093),0.9985719919204712,0.001428008079528809,
+GraphSAGE,10,3,Indigo Owl (P0011) + Amber Jaguar (P0106),Bronze Kestrel (P0053) + Ruby Fox (P0093),Team B,Bronze Kestrel (P0053) + Ruby Fox (P0093),0.1407580226659775,0.8592419773340225,
+GraphSAGE,11,1,Jade Crane (P0061) + Azure Badger (P0007),Olive Robin (P0050) + Jade Jaguar (P0064),Team A,Jade Crane (P0061) + Azure Badger (P0007),0.8448763489723206,0.1551236510276794,
+GraphSAGE,11,2,Jade Crane (P0061) + Olive Robin (P0050),Azure Badger (P0007) + Jade Jaguar (P0064),Team A,Jade Crane (P0061) + Olive Robin (P0050),0.6588845252990723,0.3411154747009277,
+GraphSAGE,11,3,Jade Crane (P0061) + Jade Jaguar (P0064),Azure Badger (P0007) + Olive Robin (P0050),Team A,Jade Crane (P0061) + Jade Jaguar (P0064),0.8595477342605591,0.1404522657394409,
+GraphSAGE,12,1,Golden Dolphin (P0057) + Silver Fox (P0112),Emerald Jaguar (P0043) + Bronze Panda (P0003),Team A,Golden Dolphin (P0057) + Silver Fox (P0112),0.6674786806106567,0.3325213193893433,
+GraphSAGE,12,2,Golden Dolphin (P0057) + Emerald Jaguar (P0043),Silver Fox (P0112) + Bronze Panda (P0003),Team A,Golden Dolphin (P0057) + Emerald Jaguar (P0043),0.8533855676651001,0.1466144323348999,
+GraphSAGE,12,3,Golden Dolphin (P0057) + Bronze Panda (P0003),Silver Fox (P0112) + Emerald Jaguar (P0043),Team A,Golden Dolphin (P0057) + Bronze Panda (P0003),0.6269019842147827,0.3730980157852173,
+GraphSAGE,13,1,Coral Jaguar (P0097) + Crimson Robin (P0068),Lilac Finch (P0069) + Emerald Fox (P0037),Team B,Lilac Finch (P0069) + Emerald Fox (P0037),0.2198613435029984,0.7801386564970016,P0037
+GraphSAGE,13,2,Coral Jaguar (P0097) + Lilac Finch (P0069),Crimson Robin (P0068) + Emerald Fox (P0037),Team A,Coral Jaguar (P0097) + Lilac Finch (P0069),0.951966404914856,0.04803359508514404,P0037
+GraphSAGE,13,3,Coral Jaguar (P0097) + Emerald Fox (P0037),Crimson Robin (P0068) + Lilac Finch (P0069),Team B,Crimson Robin (P0068) + Lilac Finch (P0069),0.1947333663702011,0.8052666336297989,P0037
+GraphSAGE,14,1,Indigo Jaguar (P0024) + Golden Kestrel (P0040),Golden Robin (P0041) + Golden Owl (P0085),Team A,Indigo Jaguar (P0024) + Golden Kestrel (P0040),0.9384090900421143,0.06159090995788574,
+GraphSAGE,14,2,Indigo Jaguar (P0024) + Golden Robin (P0041),Golden Kestrel (P0040) + Golden Owl (P0085),Team A,Indigo Jaguar (P0024) + Golden Robin (P0041),0.5673477649688721,0.4326522350311279,
+GraphSAGE,14,3,Indigo Jaguar (P0024) + Golden Owl (P0085),Golden Kestrel (P0040) + Golden Robin (P0041),Team B,Golden Kestrel (P0040) + Golden Robin (P0041),0.4522271454334259,0.5477728545665741,
+GraphSAGE,15,1,Azure Dolphin (P0019) + Violet Crane (P0113),Ivory Finch (P0092) + Golden Eagle (P0025),Team B,Ivory Finch (P0092) + Golden Eagle (P0025),0.00814877264201641,0.9918512273579836,
+GraphSAGE,15,2,Azure Dolphin (P0019) + Ivory Finch (P0092),Violet Crane (P0113) + Golden Eagle (P0025),Team A,Azure Dolphin (P0019) + Ivory Finch (P0092),0.9198691844940186,0.08013081550598145,
+GraphSAGE,15,3,Azure Dolphin (P0019) + Golden Eagle (P0025),Violet Crane (P0113) + Ivory Finch (P0092),Team A,Azure Dolphin (P0019) + Golden Eagle (P0025),0.8104494214057922,0.1895505785942078,
+GraphSAGE,16,1,Emerald Crane (P0060) + Crimson Raven (P0008),Emerald Raven (P0035) + Ivory Badger (P0059),Team A,Emerald Crane (P0060) + Crimson Raven (P0008),0.9956727027893066,0.004327297210693359,
+GraphSAGE,16,2,Emerald Crane (P0060) + Emerald Raven (P0035),Crimson Raven (P0008) + Ivory Badger (P0059),Team B,Crimson Raven (P0008) + Ivory Badger (P0059),0.2882457077503204,0.7117542922496796,
+GraphSAGE,16,3,Emerald Crane (P0060) + Ivory Badger (P0059),Crimson Raven (P0008) + Emerald Raven (P0035),Team A,Emerald Crane (P0060) + Ivory Badger (P0059),0.5394203066825867,0.4605796933174133,
+GraphSAGE,17,1,Emerald Badger (P0006) + Azure Otter (P0034),Ruby Owl (P0045) + Amber Crane (P0046),Team A,Emerald Badger (P0006) + Azure Otter (P0034),0.8676587343215942,0.1323412656784058,
+GraphSAGE,17,2,Emerald Badger (P0006) + Ruby Owl (P0045),Azure Otter (P0034) + Amber Crane (P0046),Team A,Emerald Badger (P0006) + Ruby Owl (P0045),0.9888235926628113,0.01117640733718872,
+GraphSAGE,17,3,Emerald Badger (P0006) + Amber Crane (P0046),Azure Otter (P0034) + Ruby Owl (P0045),Team B,Azure Otter (P0034) + Ruby Owl (P0045),0.01664664037525654,0.9833533596247435,
+GraphSAGE,18,1,Amber Badger (P0013) + Ivory Fox (P0049),Amber Finch (P0102) + Crimson Falcon (P0104),Team A,Amber Badger (P0013) + Ivory Fox (P0049),0.9658024907112122,0.03419750928878784,
+GraphSAGE,18,2,Amber Badger (P0013) + Amber Finch (P0102),Ivory Fox (P0049) + Crimson Falcon (P0104),Team B,Ivory Fox (P0049) + Crimson Falcon (P0104),0.09648074954748154,0.9035192504525185,
+GraphSAGE,18,3,Amber Badger (P0013) + Crimson Falcon (P0104),Ivory Fox (P0049) + Amber Finch (P0102),Team B,Ivory Fox (P0049) + Amber Finch (P0102),0.2523228824138641,0.7476771175861359,
+GraphSAGE,19,1,Bronze Finch (P0077) + Emerald Falcon (P0094),Coral Robin (P0020) + Amber Otter (P0081),Team B,Coral Robin (P0020) + Amber Otter (P0081),0.002612919779494405,0.9973870802205056,
+GraphSAGE,19,2,Bronze Finch (P0077) + Coral Robin (P0020),Emerald Falcon (P0094) + Amber Otter (P0081),Team B,Emerald Falcon (P0094) + Amber Otter (P0081),0.08042550832033157,0.9195744916796684,
+GraphSAGE,19,3,Bronze Finch (P0077) + Amber Otter (P0081),Emerald Falcon (P0094) + Coral Robin (P0020),Team B,Emerald Falcon (P0094) + Coral Robin (P0020),0.02762620337307453,0.9723737966269255,
+GraphSAGE,20,1,Lilac Lynx (P0044) + Lilac Badger (P0098),Ivory Panda (P0021) + Coral Falcon (P0001),Team B,Ivory Panda (P0021) + Coral Falcon (P0001),0.2954721450805664,0.7045278549194336,
+GraphSAGE,20,2,Lilac Lynx (P0044) + Ivory Panda (P0021),Lilac Badger (P0098) + Coral Falcon (P0001),Team B,Lilac Badger (P0098) + Coral Falcon (P0001),0.02300908602774143,0.9769909139722586,
+GraphSAGE,20,3,Lilac Lynx (P0044) + Coral Falcon (P0001),Lilac Badger (P0098) + Ivory Panda (P0021),Team A,Lilac Lynx (P0044) + Coral Falcon (P0001),0.7123374342918396,0.2876625657081604,
+GraphSAGE,21,1,Crimson Dolphin (P0109) + Emerald Dolphin (P0099),Azure Owl (P0058) + Jade Panda (P0107),Team A,Crimson Dolphin (P0109) + Emerald Dolphin (P0099),0.8641267418861389,0.1358732581138611,
+GraphSAGE,21,2,Crimson Dolphin (P0109) + Azure Owl (P0058),Emerald Dolphin (P0099) + Jade Panda (P0107),Team B,Emerald Dolphin (P0099) + Jade Panda (P0107),0.2934150397777557,0.7065849602222443,
+GraphSAGE,21,3,Crimson Dolphin (P0109) + Jade Panda (P0107),Emerald Dolphin (P0099) + Azure Owl (P0058),Team A,Crimson Dolphin (P0109) + Jade Panda (P0107),0.5478454232215881,0.4521545767784119,
+GraphSAGE,22,1,Jade Otter (P0054) + Olive Lynx (P0101),Lilac Owl (P0084) + Emerald Otter (P0026),Team A,Jade Otter (P0054) + Olive Lynx (P0101),0.756483256816864,0.243516743183136,P0026
+GraphSAGE,22,2,Jade Otter (P0054) + Lilac Owl (P0084),Olive Lynx (P0101) + Emerald Otter (P0026),Team B,Olive Lynx (P0101) + Emerald Otter (P0026),0.02865188755095005,0.97134811244905,P0026
+GraphSAGE,22,3,Jade Otter (P0054) + Emerald Otter (P0026),Olive Lynx (P0101) + Lilac Owl (P0084),Team B,Olive Lynx (P0101) + Lilac Owl (P0084),0.03967206925153732,0.9603279307484627,P0026
+GraphSAGE,23,1,Indigo Kestrel (P0072) + Jade Owl (P0096),Golden Heron (P0078) + Ruby Crane (P0065),Team B,Golden Heron (P0078) + Ruby Crane (P0065),0.02054950594902039,0.9794504940509796,P0072
+GraphSAGE,23,2,Indigo Kestrel (P0072) + Golden Heron (P0078),Jade Owl (P0096) + Ruby Crane (P0065),Team A,Indigo Kestrel (P0072) + Golden Heron (P0078),0.9921315312385559,0.007868468761444092,P0072
+GraphSAGE,23,3,Indigo Kestrel (P0072) + Ruby Crane (P0065),Jade Owl (P0096) + Golden Heron (P0078),Team B,Jade Owl (P0096) + Golden Heron (P0078),0.05264605954289436,0.9473539404571056,P0072
+GraphSAGE,24,1,Teal Falcon (P0030) + Ivory Raven (P0028),Lilac Crane (P0100) + Olive Badger (P0111),Team A,Teal Falcon (P0030) + Ivory Raven (P0028),0.9892846941947937,0.0107153058052063,
+GraphSAGE,24,2,Teal Falcon (P0030) + Lilac Crane (P0100),Ivory Raven (P0028) + Olive Badger (P0111),Team B,Ivory Raven (P0028) + Olive Badger (P0111),0.05375928804278374,0.9462407119572163,
+GraphSAGE,24,3,Teal Falcon (P0030) + Olive Badger (P0111),Ivory Raven (P0028) + Lilac Crane (P0100),Team B,Ivory Raven (P0028) + Lilac Crane (P0100),0.2009575068950653,0.7990424931049347,
+GraphSAGE,25,1,Amber Lynx (P0005) + Jade Badger (P0055),Emerald Kestrel (P0076) + Indigo Raven (P0012),Team A,Amber Lynx (P0005) + Jade Badger (P0055),0.7862862944602966,0.2137137055397034,
+GraphSAGE,25,2,Amber Lynx (P0005) + Emerald Kestrel (P0076),Jade Badger (P0055) + Indigo Raven (P0012),Team B,Jade Badger (P0055) + Indigo Raven (P0012),0.4140088856220245,0.5859911143779755,
+GraphSAGE,25,3,Amber Lynx (P0005) + Indigo Raven (P0012),Jade Badger (P0055) + Emerald Kestrel (P0076),Team B,Jade Badger (P0055) + Emerald Kestrel (P0076),0.05648988112807274,0.9435101188719273,
+GraphSAGE,26,1,Lilac Otter (P0070) + Silver Robin (P0105),Indigo Otter (P0087) + Silver Raven (P0014),Team A,Lilac Otter (P0070) + Silver Robin (P0105),0.998309850692749,0.001690149307250977,
+GraphSAGE,26,2,Lilac Otter (P0070) + Indigo Otter (P0087),Silver Robin (P0105) + Silver Raven (P0014),Team A,Lilac Otter (P0070) + Indigo Otter (P0087),0.9800013899803162,0.01999861001968384,
+GraphSAGE,26,3,Lilac Otter (P0070) + Silver Raven (P0014),Silver Robin (P0105) + Indigo Otter (P0087),Team A,Lilac Otter (P0070) + Silver Raven (P0014),0.8553103804588318,0.1446896195411682,
+GraphSAGE,27,1,Golden Jaguar (P0110) + Crimson Finch (P0018),Lilac Eagle (P0029) + Golden Falcon (P0032),Team A,Golden Jaguar (P0110) + Crimson Finch (P0018),0.9873728156089783,0.01262718439102173,P0032
+GraphSAGE,27,2,Golden Jaguar (P0110) + Lilac Eagle (P0029),Crimson Finch (P0018) + Golden Falcon (P0032),Team B,Crimson Finch (P0018) + Golden Falcon (P0032),0.2299138903617859,0.7700861096382141,P0032
+GraphSAGE,27,3,Golden Jaguar (P0110) + Golden Falcon (P0032),Crimson Finch (P0018) + Lilac Eagle (P0029),Team A,Golden Jaguar (P0110) + Golden Falcon (P0032),0.7498599886894226,0.2501400113105774,P0032
+GraphSAGE,28,1,Ruby Heron (P0036) + Ruby Falcon (P0095),Indigo Eagle (P0004) + Ivory Eagle (P0015),Team B,Indigo Eagle (P0004) + Ivory Eagle (P0015),0.01866018399596214,0.9813398160040379,P0095
+GraphSAGE,28,2,Ruby Heron (P0036) + Indigo Eagle (P0004),Ruby Falcon (P0095) + Ivory Eagle (P0015),Team B,Ruby Falcon (P0095) + Ivory Eagle (P0015),0.02767851948738098,0.972321480512619,P0095
+GraphSAGE,28,3,Ruby Heron (P0036) + Ivory Eagle (P0015),Ruby Falcon (P0095) + Indigo Eagle (P0004),Team A,Ruby Heron (P0036) + Ivory Eagle (P0015),0.7219123244285583,0.2780876755714417,P0095
+Elo,1,1,Azure Falcon (P0027) + Bronze Eagle (P0016),Ruby Kestrel (P0031) + Ruby Robin (P0022),Team B,Ruby Kestrel (P0031) + Ruby Robin (P0022),0.427480654712892,0.572519345287108,
+Elo,1,2,Azure Falcon (P0027) + Ruby Kestrel (P0031),Bronze Eagle (P0016) + Ruby Robin (P0022),Team A,Azure Falcon (P0027) + Ruby Kestrel (P0031),0.8966831447568602,0.1033168552431398,
+Elo,1,3,Azure Falcon (P0027) + Ruby Robin (P0022),Bronze Eagle (P0016) + Ruby Kestrel (P0031),Team A,Azure Falcon (P0027) + Ruby Robin (P0022),0.6707769109221345,0.3292230890778655,
+Elo,2,1,Lilac Raven (P0048) + Amber Raven (P0071),Coral Panda (P0010) + Jade Heron (P0090),Team A,Lilac Raven (P0048) + Amber Raven (P0071),0.6703976541991445,0.3296023458008555,
+Elo,2,2,Lilac Raven (P0048) + Coral Panda (P0010),Amber Raven (P0071) + Jade Heron (P0090),Team B,Amber Raven (P0071) + Jade Heron (P0090),0.4851824888890419,0.5148175111109581,
+Elo,2,3,Lilac Raven (P0048) + Jade Heron (P0090),Amber Raven (P0071) + Coral Panda (P0010),Team B,Amber Raven (P0071) + Coral Panda (P0010),0.3053749874876721,0.6946250125123279,
+Elo,3,1,Violet Raven (P0017) + Lilac Panda (P0108),Azure Robin (P0042) + Olive Fox (P0091),Team B,Azure Robin (P0042) + Olive Fox (P0091),0.4016929851711332,0.5983070148288667,
+Elo,3,2,Violet Raven (P0017) + Azure Robin (P0042),Lilac Panda (P0108) + Olive Fox (P0091),Team A,Violet Raven (P0017) + Azure Robin (P0042),0.6227376510459012,0.3772623489540988,
+Elo,3,3,Violet Raven (P0017) + Olive Fox (P0091),Lilac Panda (P0108) + Azure Robin (P0042),Team A,Violet Raven (P0017) + Olive Fox (P0091),0.8062229708760124,0.1937770291239876,
+Elo,4,1,Violet Panda (P0063) + Ruby Dolphin (P0080),Olive Panda (P0066) + Ivory Falcon (P0067),Team B,Olive Panda (P0066) + Ivory Falcon (P0067),0.4815600809030671,0.5184399190969329,
+Elo,4,2,Violet Panda (P0063) + Olive Panda (P0066),Ruby Dolphin (P0080) + Ivory Falcon (P0067),Team B,Ruby Dolphin (P0080) + Ivory Falcon (P0067),0.4198813333515498,0.5801186666484502,
+Elo,4,3,Violet Panda (P0063) + Ivory Falcon (P0067),Ruby Dolphin (P0080) + Olive Panda (P0066),Team B,Ruby Dolphin (P0080) + Olive Panda (P0066),0.2581229479705816,0.7418770520294184,
+Elo,5,1,Ruby Otter (P0002) + Lilac Robin (P0052),Indigo Lynx (P0088) + Crimson Jaguar (P0074),Team A,Ruby Otter (P0002) + Lilac Robin (P0052),0.6178082769156209,0.3821917230843791,
+Elo,5,2,Ruby Otter (P0002) + Indigo Lynx (P0088),Lilac Robin (P0052) + Crimson Jaguar (P0074),Team A,Ruby Otter (P0002) + Indigo Lynx (P0088),0.7126932065637728,0.2873067934362272,
+Elo,5,3,Ruby Otter (P0002) + Crimson Jaguar (P0074),Lilac Robin (P0052) + Indigo Lynx (P0088),Team A,Ruby Otter (P0002) + Crimson Jaguar (P0074),0.7058599274434287,0.2941400725565713,
+Elo,6,1,Emerald Owl (P0039) + Coral Kestrel (P0009),Olive Heron (P0051) + Emerald Panda (P0047),Team A,Emerald Owl (P0039) + Coral Kestrel (P0009),0.6410413020486637,0.3589586979513363,P0039
+Elo,6,2,Emerald Owl (P0039) + Olive Heron (P0051),Coral Kestrel (P0009) + Emerald Panda (P0047),Team A,Emerald Owl (P0039) + Olive Heron (P0051),0.9334824239660091,0.06651757603399089,P0039
+Elo,6,3,Emerald Owl (P0039) + Emerald Panda (P0047),Coral Kestrel (P0009) + Olive Heron (P0051),Team B,Coral Kestrel (P0009) + Olive Heron (P0051),0.06196841860576054,0.9380315813942395,P0039
+Elo,7,1,Amber Robin (P0103) + Bronze Falcon (P0062),Bronze Owl (P0083) + Bronze Fox (P0033),Team B,Bronze Owl (P0083) + Bronze Fox (P0033),0.3974238987080551,0.6025761012919449,P0062
+Elo,7,2,Amber Robin (P0103) + Bronze Owl (P0083),Bronze Falcon (P0062) + Bronze Fox (P0033),Team A,Amber Robin (P0103) + Bronze Owl (P0083),0.7808007916787987,0.2191992083212013,P0062
+Elo,7,3,Amber Robin (P0103) + Bronze Fox (P0033),Bronze Falcon (P0062) + Bronze Owl (P0083),Team B,Bronze Falcon (P0062) + Bronze Owl (P0083),0.4779224952420609,0.5220775047579391,P0062
+Elo,8,1,Teal Owl (P0073) + Coral Finch (P0079),Teal Fox (P0075) + Azure Raven (P0086),Team A,Teal Owl (P0073) + Coral Finch (P0079),0.9009637820452139,0.09903621795478612,
+Elo,8,2,Teal Owl (P0073) + Teal Fox (P0075),Coral Finch (P0079) + Azure Raven (P0086),Team A,Teal Owl (P0073) + Teal Fox (P0075),0.7552292143591766,0.2447707856408234,
+Elo,8,3,Teal Owl (P0073) + Azure Raven (P0086),Coral Finch (P0079) + Teal Fox (P0075),Team A,Teal Owl (P0073) + Azure Raven (P0086),0.9171278835511844,0.08287211644881565,
+Elo,9,1,Bronze Dolphin (P0056) + Violet Badger (P0089),Jade Kestrel (P0023) + Jade Fox (P0038),Team B,Jade Kestrel (P0023) + Jade Fox (P0038),0.1171855349184872,0.8828144650815127,
+Elo,9,2,Bronze Dolphin (P0056) + Jade Kestrel (P0023),Violet Badger (P0089) + Jade Fox (P0038),Team A,Bronze Dolphin (P0056) + Jade Kestrel (P0023),0.8148296584478603,0.1851703415521397,
+Elo,9,3,Bronze Dolphin (P0056) + Jade Fox (P0038),Violet Badger (P0089) + Jade Kestrel (P0023),Team A,Bronze Dolphin (P0056) + Jade Fox (P0038),0.6189599039181608,0.3810400960818392,
+Elo,10,1,Indigo Owl (P0011) + Bronze Kestrel (P0053),Ruby Fox (P0093) + Amber Jaguar (P0106),Team B,Ruby Fox (P0093) + Amber Jaguar (P0106),0.32434760957843,0.6756523904215701,
+Elo,10,2,Indigo Owl (P0011) + Ruby Fox (P0093),Bronze Kestrel (P0053) + Amber Jaguar (P0106),Team A,Indigo Owl (P0011) + Ruby Fox (P0093),0.9149723555662715,0.08502764443372846,
+Elo,10,3,Indigo Owl (P0011) + Amber Jaguar (P0106),Bronze Kestrel (P0053) + Ruby Fox (P0093),Team B,Bronze Kestrel (P0053) + Ruby Fox (P0093),0.2033690743544189,0.7966309256455811,
+Elo,11,1,Jade Crane (P0061) + Azure Badger (P0007),Olive Robin (P0050) + Jade Jaguar (P0064),Team A,Jade Crane (P0061) + Azure Badger (P0007),0.7956201310895293,0.2043798689104707,
+Elo,11,2,Jade Crane (P0061) + Olive Robin (P0050),Azure Badger (P0007) + Jade Jaguar (P0064),Team A,Jade Crane (P0061) + Olive Robin (P0050),0.6577671035113868,0.3422328964886132,
+Elo,11,3,Jade Crane (P0061) + Jade Jaguar (P0064),Azure Badger (P0007) + Olive Robin (P0050),Team A,Jade Crane (P0061) + Jade Jaguar (P0064),0.7665746822239612,0.2334253177760388,
+Elo,12,1,Golden Dolphin (P0057) + Silver Fox (P0112),Emerald Jaguar (P0043) + Bronze Panda (P0003),Team A,Golden Dolphin (P0057) + Silver Fox (P0112),0.6481357963657506,0.3518642036342494,
+Elo,12,2,Golden Dolphin (P0057) + Emerald Jaguar (P0043),Silver Fox (P0112) + Bronze Panda (P0003),Team A,Golden Dolphin (P0057) + Emerald Jaguar (P0043),0.7296048499393789,0.2703951500606211,
+Elo,12,3,Golden Dolphin (P0057) + Bronze Panda (P0003),Silver Fox (P0112) + Emerald Jaguar (P0043),Team A,Golden Dolphin (P0057) + Bronze Panda (P0003),0.5684433947075015,0.4315566052924985,
+Elo,13,1,Coral Jaguar (P0097) + Crimson Robin (P0068),Lilac Finch (P0069) + Emerald Fox (P0037),Team B,Lilac Finch (P0069) + Emerald Fox (P0037),0.2609033912320375,0.7390966087679625,P0037
+Elo,13,2,Coral Jaguar (P0097) + Lilac Finch (P0069),Crimson Robin (P0068) + Emerald Fox (P0037),Team A,Coral Jaguar (P0097) + Lilac Finch (P0069),0.6543756372831051,0.3456243627168949,P0037
+Elo,13,3,Coral Jaguar (P0097) + Emerald Fox (P0037),Crimson Robin (P0068) + Lilac Finch (P0069),Team B,Crimson Robin (P0068) + Lilac Finch (P0069),0.3369081091940789,0.6630918908059211,P0037
+Elo,14,1,Indigo Jaguar (P0024) + Golden Kestrel (P0040),Golden Robin (P0041) + Golden Owl (P0085),Team A,Indigo Jaguar (P0024) + Golden Kestrel (P0040),0.8315908045864677,0.1684091954135323,
+Elo,14,2,Indigo Jaguar (P0024) + Golden Robin (P0041),Golden Kestrel (P0040) + Golden Owl (P0085),Team B,Golden Kestrel (P0040) + Golden Owl (P0085),0.4844796507557514,0.5155203492442486,
+Elo,14,3,Indigo Jaguar (P0024) + Golden Owl (P0085),Golden Kestrel (P0040) + Golden Robin (P0041),Team A,Indigo Jaguar (P0024) + Golden Owl (P0085),0.5877903772241456,0.4122096227758544,
+Elo,15,1,Azure Dolphin (P0019) + Violet Crane (P0113),Ivory Finch (P0092) + Golden Eagle (P0025),Team B,Ivory Finch (P0092) + Golden Eagle (P0025),0.1855033629234363,0.8144966370765637,
+Elo,15,2,Azure Dolphin (P0019) + Ivory Finch (P0092),Violet Crane (P0113) + Golden Eagle (P0025),Team B,Violet Crane (P0113) + Golden Eagle (P0025),0.4037225998763531,0.5962774001236469,
+Elo,15,3,Azure Dolphin (P0019) + Golden Eagle (P0025),Violet Crane (P0113) + Ivory Finch (P0092),Team B,Violet Crane (P0113) + Ivory Finch (P0092),0.2736972288201359,0.7263027711798642,
+Elo,16,1,Emerald Crane (P0060) + Crimson Raven (P0008),Emerald Raven (P0035) + Ivory Badger (P0059),Team A,Emerald Crane (P0060) + Crimson Raven (P0008),0.9557910729607008,0.04420892703929924,
+Elo,16,2,Emerald Crane (P0060) + Emerald Raven (P0035),Crimson Raven (P0008) + Ivory Badger (P0059),Team B,Crimson Raven (P0008) + Ivory Badger (P0059),0.1902364303984607,0.8097635696015393,
+Elo,16,3,Emerald Crane (P0060) + Ivory Badger (P0059),Crimson Raven (P0008) + Emerald Raven (P0035),Team A,Emerald Crane (P0060) + Ivory Badger (P0059),0.6982885010078806,0.3017114989921194,
+Elo,17,1,Emerald Badger (P0006) + Azure Otter (P0034),Ruby Owl (P0045) + Amber Crane (P0046),Team B,Ruby Owl (P0045) + Amber Crane (P0046),0.4479420946796153,0.5520579053203847,
+Elo,17,2,Emerald Badger (P0006) + Ruby Owl (P0045),Azure Otter (P0034) + Amber Crane (P0046),Team A,Emerald Badger (P0006) + Ruby Owl (P0045),0.7278461786900482,0.2721538213099518,
+Elo,17,3,Emerald Badger (P0006) + Amber Crane (P0046),Azure Otter (P0034) + Ruby Owl (P0045),Team B,Azure Otter (P0034) + Ruby Owl (P0045),0.3644161749706561,0.635583825029344,
+Elo,18,1,Amber Badger (P0013) + Ivory Fox (P0049),Amber Finch (P0102) + Crimson Falcon (P0104),Team A,Amber Badger (P0013) + Ivory Fox (P0049),0.811612708003343,0.188387291996657,
+Elo,18,2,Amber Badger (P0013) + Amber Finch (P0102),Ivory Fox (P0049) + Crimson Falcon (P0104),Team B,Ivory Fox (P0049) + Crimson Falcon (P0104),0.2153613316381125,0.7846386683618876,
+Elo,18,3,Amber Badger (P0013) + Crimson Falcon (P0104),Ivory Fox (P0049) + Amber Finch (P0102),Team A,Amber Badger (P0013) + Crimson Falcon (P0104),0.5674938164634844,0.4325061835365156,
+Elo,19,1,Bronze Finch (P0077) + Emerald Falcon (P0094),Coral Robin (P0020) + Amber Otter (P0081),Team B,Coral Robin (P0020) + Amber Otter (P0081),0.06089647565043939,0.9391035243495606,
+Elo,19,2,Bronze Finch (P0077) + Coral Robin (P0020),Emerald Falcon (P0094) + Amber Otter (P0081),Team B,Emerald Falcon (P0094) + Amber Otter (P0081),0.3018739826422168,0.6981260173577832,
+Elo,19,3,Bronze Finch (P0077) + Amber Otter (P0081),Emerald Falcon (P0094) + Coral Robin (P0020),Team B,Emerald Falcon (P0094) + Coral Robin (P0020),0.1796230654524765,0.8203769345475235,
+Elo,20,1,Lilac Lynx (P0044) + Lilac Badger (P0098),Ivory Panda (P0021) + Coral Falcon (P0001),Team B,Ivory Panda (P0021) + Coral Falcon (P0001),0.358817384762052,0.6411826152379481,
+Elo,20,2,Lilac Lynx (P0044) + Ivory Panda (P0021),Lilac Badger (P0098) + Coral Falcon (P0001),Team B,Lilac Badger (P0098) + Coral Falcon (P0001),0.04700337857464194,0.952996621425358,
+Elo,20,3,Lilac Lynx (P0044) + Coral Falcon (P0001),Lilac Badger (P0098) + Ivory Panda (P0021),Team A,Lilac Lynx (P0044) + Coral Falcon (P0001),0.6113608435033541,0.3886391564966459,
+Elo,21,1,Crimson Dolphin (P0109) + Emerald Dolphin (P0099),Azure Owl (P0058) + Jade Panda (P0107),Team A,Crimson Dolphin (P0109) + Emerald Dolphin (P0099),0.6717848670117222,0.3282151329882778,
+Elo,21,2,Crimson Dolphin (P0109) + Azure Owl (P0058),Emerald Dolphin (P0099) + Jade Panda (P0107),Team B,Emerald Dolphin (P0099) + Jade Panda (P0107),0.222030941289773,0.7779690587102269,
+Elo,21,3,Crimson Dolphin (P0109) + Jade Panda (P0107),Emerald Dolphin (P0099) + Azure Owl (P0058),Team A,Crimson Dolphin (P0109) + Jade Panda (P0107),0.5972258563795193,0.4027741436204807,
+Elo,22,1,Jade Otter (P0054) + Olive Lynx (P0101),Lilac Owl (P0084) + Emerald Otter (P0026),Team A,Jade Otter (P0054) + Olive Lynx (P0101),0.6565653927883853,0.3434346072116147,P0026
+Elo,22,2,Jade Otter (P0054) + Lilac Owl (P0084),Olive Lynx (P0101) + Emerald Otter (P0026),Team B,Olive Lynx (P0101) + Emerald Otter (P0026),0.1537010416752218,0.8462989583247782,P0026
+Elo,22,3,Jade Otter (P0054) + Emerald Otter (P0026),Olive Lynx (P0101) + Lilac Owl (P0084),Team B,Olive Lynx (P0101) + Lilac Owl (P0084),0.4164331127892048,0.5835668872107952,P0026
+Elo,23,1,Indigo Kestrel (P0072) + Jade Owl (P0096),Golden Heron (P0078) + Ruby Crane (P0065),Team B,Golden Heron (P0078) + Ruby Crane (P0065),0.2960505102724813,0.7039494897275187,P0072
+Elo,23,2,Indigo Kestrel (P0072) + Golden Heron (P0078),Jade Owl (P0096) + Ruby Crane (P0065),Team A,Indigo Kestrel (P0072) + Golden Heron (P0078),0.8787604177232629,0.1212395822767371,P0072
+Elo,23,3,Indigo Kestrel (P0072) + Ruby Crane (P0065),Jade Owl (P0096) + Golden Heron (P0078),Team B,Jade Owl (P0096) + Golden Heron (P0078),0.1466996499324342,0.8533003500675658,P0072
+Elo,24,1,Teal Falcon (P0030) + Ivory Raven (P0028),Lilac Crane (P0100) + Olive Badger (P0111),Team A,Teal Falcon (P0030) + Ivory Raven (P0028),0.8918539268063294,0.1081460731936706,
+Elo,24,2,Teal Falcon (P0030) + Lilac Crane (P0100),Ivory Raven (P0028) + Olive Badger (P0111),Team B,Ivory Raven (P0028) + Olive Badger (P0111),0.120593541617442,0.8794064583825579,
+Elo,24,3,Teal Falcon (P0030) + Olive Badger (P0111),Ivory Raven (P0028) + Lilac Crane (P0100),Team B,Ivory Raven (P0028) + Lilac Crane (P0100),0.2865477771416979,0.7134522228583021,
+Elo,25,1,Amber Lynx (P0005) + Jade Badger (P0055),Emerald Kestrel (P0076) + Indigo Raven (P0012),Team A,Amber Lynx (P0005) + Jade Badger (P0055),0.6650722466234976,0.3349277533765024,
+Elo,25,2,Amber Lynx (P0005) + Emerald Kestrel (P0076),Jade Badger (P0055) + Indigo Raven (P0012),Team B,Jade Badger (P0055) + Indigo Raven (P0012),0.4029787052452226,0.5970212947547775,
+Elo,25,3,Amber Lynx (P0005) + Indigo Raven (P0012),Jade Badger (P0055) + Emerald Kestrel (P0076),Team A,Amber Lynx (P0005) + Indigo Raven (P0012),0.5038384993622513,0.4961615006377487,
+Elo,26,1,Lilac Otter (P0070) + Silver Robin (P0105),Indigo Otter (P0087) + Silver Raven (P0014),Team A,Lilac Otter (P0070) + Silver Robin (P0105),0.9614694684836487,0.03853053151635133,
+Elo,26,2,Lilac Otter (P0070) + Indigo Otter (P0087),Silver Robin (P0105) + Silver Raven (P0014),Team A,Lilac Otter (P0070) + Indigo Otter (P0087),0.8435857242979492,0.1564142757020508,
+Elo,26,3,Lilac Otter (P0070) + Silver Raven (P0014),Silver Robin (P0105) + Indigo Otter (P0087),Team A,Lilac Otter (P0070) + Silver Raven (P0014),0.7579718941734275,0.2420281058265725,
+Elo,27,1,Golden Jaguar (P0110) + Crimson Finch (P0018),Lilac Eagle (P0029) + Golden Falcon (P0032),Team A,Golden Jaguar (P0110) + Crimson Finch (P0018),0.8843826042534757,0.1156173957465243,P0032
+Elo,27,2,Golden Jaguar (P0110) + Lilac Eagle (P0029),Crimson Finch (P0018) + Golden Falcon (P0032),Team B,Crimson Finch (P0018) + Golden Falcon (P0032),0.1932851339183558,0.8067148660816441,P0032
+Elo,27,3,Golden Jaguar (P0110) + Golden Falcon (P0032),Crimson Finch (P0018) + Lilac Eagle (P0029),Team A,Golden Jaguar (P0110) + Golden Falcon (P0032),0.8661530896118148,0.1338469103881852,P0032
+Elo,28,1,Ruby Heron (P0036) + Ruby Falcon (P0095),Indigo Eagle (P0004) + Ivory Eagle (P0015),Team B,Indigo Eagle (P0004) + Ivory Eagle (P0015),0.3488577491538868,0.6511422508461132,P0095
+Elo,28,2,Ruby Heron (P0036) + Indigo Eagle (P0004),Ruby Falcon (P0095) + Ivory Eagle (P0015),Team B,Ruby Falcon (P0095) + Ivory Eagle (P0015),0.1409684194624529,0.8590315805375471,P0095
+Elo,28,3,Ruby Heron (P0036) + Ivory Eagle (P0015),Ruby Falcon (P0095) + Indigo Eagle (P0004),Team A,Ruby Heron (P0036) + Ivory Eagle (P0015),0.7146068466928374,0.2853931533071626,P0095
+Tabular,1,1,Azure Falcon (P0027) + Bronze Eagle (P0016),Ruby Kestrel (P0031) + Ruby Robin (P0022),Team B,Ruby Kestrel (P0031) + Ruby Robin (P0022),0.3140362669998816,0.6859637330001185,
+Tabular,1,2,Azure Falcon (P0027) + Ruby Kestrel (P0031),Bronze Eagle (P0016) + Ruby Robin (P0022),Team A,Azure Falcon (P0027) + Ruby Kestrel (P0031),0.9681539115926208,0.03184608840737924,
+Tabular,1,3,Azure Falcon (P0027) + Ruby Robin (P0022),Bronze Eagle (P0016) + Ruby Kestrel (P0031),Team A,Azure Falcon (P0027) + Ruby Robin (P0022),0.781378532472141,0.218621467527859,
+Tabular,2,1,Lilac Raven (P0048) + Amber Raven (P0071),Coral Panda (P0010) + Jade Heron (P0090),Team A,Lilac Raven (P0048) + Amber Raven (P0071),0.6761321251097118,0.3238678748902882,
+Tabular,2,2,Lilac Raven (P0048) + Coral Panda (P0010),Amber Raven (P0071) + Jade Heron (P0090),Team B,Amber Raven (P0071) + Jade Heron (P0090),0.2951858894289971,0.7048141105710028,
+Tabular,2,3,Lilac Raven (P0048) + Jade Heron (P0090),Amber Raven (P0071) + Coral Panda (P0010),Team B,Amber Raven (P0071) + Coral Panda (P0010),0.2588912323847616,0.7411087676152384,
+Tabular,3,1,Violet Raven (P0017) + Lilac Panda (P0108),Azure Robin (P0042) + Olive Fox (P0091),Team B,Azure Robin (P0042) + Olive Fox (P0091),0.3166848367340217,0.6833151632659783,
+Tabular,3,2,Violet Raven (P0017) + Azure Robin (P0042),Lilac Panda (P0108) + Olive Fox (P0091),Team A,Violet Raven (P0017) + Azure Robin (P0042),0.6494726377279574,0.3505273622720426,
+Tabular,3,3,Violet Raven (P0017) + Olive Fox (P0091),Lilac Panda (P0108) + Azure Robin (P0042),Team A,Violet Raven (P0017) + Olive Fox (P0091),0.7248528782105657,0.2751471217894343,
+Tabular,4,1,Violet Panda (P0063) + Ruby Dolphin (P0080),Olive Panda (P0066) + Ivory Falcon (P0067),Team B,Olive Panda (P0066) + Ivory Falcon (P0067),0.4479718311204117,0.5520281688795883,
+Tabular,4,2,Violet Panda (P0063) + Olive Panda (P0066),Ruby Dolphin (P0080) + Ivory Falcon (P0067),Team B,Ruby Dolphin (P0080) + Ivory Falcon (P0067),0.4688459319835367,0.5311540680164633,
+Tabular,4,3,Violet Panda (P0063) + Ivory Falcon (P0067),Ruby Dolphin (P0080) + Olive Panda (P0066),Team B,Ruby Dolphin (P0080) + Olive Panda (P0066),0.1461350150420825,0.8538649849579175,
+Tabular,5,1,Ruby Otter (P0002) + Lilac Robin (P0052),Indigo Lynx (P0088) + Crimson Jaguar (P0074),Team B,Indigo Lynx (P0088) + Crimson Jaguar (P0074),0.4807279295330399,0.5192720704669601,
+Tabular,5,2,Ruby Otter (P0002) + Indigo Lynx (P0088),Lilac Robin (P0052) + Crimson Jaguar (P0074),Team A,Ruby Otter (P0002) + Indigo Lynx (P0088),0.8936089540129061,0.1063910459870939,
+Tabular,5,3,Ruby Otter (P0002) + Crimson Jaguar (P0074),Lilac Robin (P0052) + Indigo Lynx (P0088),Team A,Ruby Otter (P0002) + Crimson Jaguar (P0074),0.8686222668390559,0.1313777331609441,
+Tabular,6,1,Emerald Owl (P0039) + Coral Kestrel (P0009),Olive Heron (P0051) + Emerald Panda (P0047),Team B,Olive Heron (P0051) + Emerald Panda (P0047),0.4758081177037402,0.5241918822962598,P0039
+Tabular,6,2,Emerald Owl (P0039) + Olive Heron (P0051),Coral Kestrel (P0009) + Emerald Panda (P0047),Team A,Emerald Owl (P0039) + Olive Heron (P0051),0.9629578048993478,0.03704219510065221,P0039
+Tabular,6,3,Emerald Owl (P0039) + Emerald Panda (P0047),Coral Kestrel (P0009) + Olive Heron (P0051),Team B,Coral Kestrel (P0009) + Olive Heron (P0051),0.01046184562066534,0.9895381543793347,P0039
+Tabular,7,1,Amber Robin (P0103) + Bronze Falcon (P0062),Bronze Owl (P0083) + Bronze Fox (P0033),Team B,Bronze Owl (P0083) + Bronze Fox (P0033),0.2469962597096544,0.7530037402903456,P0062
+Tabular,7,2,Amber Robin (P0103) + Bronze Owl (P0083),Bronze Falcon (P0062) + Bronze Fox (P0033),Team A,Amber Robin (P0103) + Bronze Owl (P0083),0.9303672499703624,0.06963275002963765,P0062
+Tabular,7,3,Amber Robin (P0103) + Bronze Fox (P0033),Bronze Falcon (P0062) + Bronze Owl (P0083),Team A,Amber Robin (P0103) + Bronze Fox (P0033),0.6756817039314675,0.3243182960685325,P0062
+Tabular,8,1,Teal Owl (P0073) + Coral Finch (P0079),Teal Fox (P0075) + Azure Raven (P0086),Team A,Teal Owl (P0073) + Coral Finch (P0079),0.9486598617556807,0.05134013824431927,
+Tabular,8,2,Teal Owl (P0073) + Teal Fox (P0075),Coral Finch (P0079) + Azure Raven (P0086),Team A,Teal Owl (P0073) + Teal Fox (P0075),0.8647113565876573,0.1352886434123427,
+Tabular,8,3,Teal Owl (P0073) + Azure Raven (P0086),Coral Finch (P0079) + Teal Fox (P0075),Team A,Teal Owl (P0073) + Azure Raven (P0086),0.9858159246488585,0.01418407535114152,
+Tabular,9,1,Bronze Dolphin (P0056) + Violet Badger (P0089),Jade Kestrel (P0023) + Jade Fox (P0038),Team B,Jade Kestrel (P0023) + Jade Fox (P0038),0.05228576443248334,0.9477142355675167,
+Tabular,9,2,Bronze Dolphin (P0056) + Jade Kestrel (P0023),Violet Badger (P0089) + Jade Fox (P0038),Team A,Bronze Dolphin (P0056) + Jade Kestrel (P0023),0.9012771809588864,0.09872281904111357,
+Tabular,9,3,Bronze Dolphin (P0056) + Jade Fox (P0038),Violet Badger (P0089) + Jade Kestrel (P0023),Team A,Bronze Dolphin (P0056) + Jade Fox (P0038),0.7095430765928734,0.2904569234071266,
+Tabular,10,1,Indigo Owl (P0011) + Bronze Kestrel (P0053),Ruby Fox (P0093) + Amber Jaguar (P0106),Team B,Ruby Fox (P0093) + Amber Jaguar (P0106),0.1327962981432311,0.8672037018567689,
+Tabular,10,2,Indigo Owl (P0011) + Ruby Fox (P0093),Bronze Kestrel (P0053) + Amber Jaguar (P0106),Team A,Indigo Owl (P0011) + Ruby Fox (P0093),0.9827172717171729,0.01728272828282706,
+Tabular,10,3,Indigo Owl (P0011) + Amber Jaguar (P0106),Bronze Kestrel (P0053) + Ruby Fox (P0093),Team B,Bronze Kestrel (P0053) + Ruby Fox (P0093),0.0650093296096755,0.9349906703903245,
+Tabular,11,1,Jade Crane (P0061) + Azure Badger (P0007),Olive Robin (P0050) + Jade Jaguar (P0064),Team A,Jade Crane (P0061) + Azure Badger (P0007),0.8603453681210357,0.1396546318789643,
+Tabular,11,2,Jade Crane (P0061) + Olive Robin (P0050),Azure Badger (P0007) + Jade Jaguar (P0064),Team A,Jade Crane (P0061) + Olive Robin (P0050),0.7151081060905239,0.2848918939094761,
+Tabular,11,3,Jade Crane (P0061) + Jade Jaguar (P0064),Azure Badger (P0007) + Olive Robin (P0050),Team A,Jade Crane (P0061) + Jade Jaguar (P0064),0.82518508393534,0.17481491606466,
+Tabular,12,1,Golden Dolphin (P0057) + Silver Fox (P0112),Emerald Jaguar (P0043) + Bronze Panda (P0003),Team A,Golden Dolphin (P0057) + Silver Fox (P0112),0.686261164152304,0.313738835847696,
+Tabular,12,2,Golden Dolphin (P0057) + Emerald Jaguar (P0043),Silver Fox (P0112) + Bronze Panda (P0003),Team A,Golden Dolphin (P0057) + Emerald Jaguar (P0043),0.8274124007961824,0.1725875992038176,
+Tabular,12,3,Golden Dolphin (P0057) + Bronze Panda (P0003),Silver Fox (P0112) + Emerald Jaguar (P0043),Team A,Golden Dolphin (P0057) + Bronze Panda (P0003),0.6256986883644895,0.3743013116355105,
+Tabular,13,1,Coral Jaguar (P0097) + Crimson Robin (P0068),Lilac Finch (P0069) + Emerald Fox (P0037),Team B,Lilac Finch (P0069) + Emerald Fox (P0037),0.1769991585112524,0.8230008414887475,P0037
+Tabular,13,2,Coral Jaguar (P0097) + Lilac Finch (P0069),Crimson Robin (P0068) + Emerald Fox (P0037),Team A,Coral Jaguar (P0097) + Lilac Finch (P0069),0.9312963628942568,0.06870363710574323,P0037
+Tabular,13,3,Coral Jaguar (P0097) + Emerald Fox (P0037),Crimson Robin (P0068) + Lilac Finch (P0069),Team B,Crimson Robin (P0068) + Lilac Finch (P0069),0.3164578316156317,0.6835421683843683,P0037
+Tabular,14,1,Indigo Jaguar (P0024) + Golden Kestrel (P0040),Golden Robin (P0041) + Golden Owl (P0085),Team A,Indigo Jaguar (P0024) + Golden Kestrel (P0040),0.8499597058447131,0.1500402941552869,
+Tabular,14,2,Indigo Jaguar (P0024) + Golden Robin (P0041),Golden Kestrel (P0040) + Golden Owl (P0085),Team B,Golden Kestrel (P0040) + Golden Owl (P0085),0.4978109998112905,0.5021890001887095,
+Tabular,14,3,Indigo Jaguar (P0024) + Golden Owl (P0085),Golden Kestrel (P0040) + Golden Robin (P0041),Team A,Indigo Jaguar (P0024) + Golden Owl (P0085),0.6249880019431444,0.3750119980568556,
+Tabular,15,1,Azure Dolphin (P0019) + Violet Crane (P0113),Ivory Finch (P0092) + Golden Eagle (P0025),Team B,Ivory Finch (P0092) + Golden Eagle (P0025),0.01380392067187308,0.9861960793281269,
+Tabular,15,2,Azure Dolphin (P0019) + Ivory Finch (P0092),Violet Crane (P0113) + Golden Eagle (P0025),Team A,Azure Dolphin (P0019) + Ivory Finch (P0092),0.924398325286275,0.07560167471372503,
+Tabular,15,3,Azure Dolphin (P0019) + Golden Eagle (P0025),Violet Crane (P0113) + Ivory Finch (P0092),Team A,Azure Dolphin (P0019) + Golden Eagle (P0025),0.7418061109803636,0.2581938890196364,
+Tabular,16,1,Emerald Crane (P0060) + Crimson Raven (P0008),Emerald Raven (P0035) + Ivory Badger (P0059),Team A,Emerald Crane (P0060) + Crimson Raven (P0008),0.9817694868007573,0.01823051319924274,
+Tabular,16,2,Emerald Crane (P0060) + Emerald Raven (P0035),Crimson Raven (P0008) + Ivory Badger (P0059),Team B,Crimson Raven (P0008) + Ivory Badger (P0059),0.1400043374570833,0.8599956625429167,
+Tabular,16,3,Emerald Crane (P0060) + Ivory Badger (P0059),Crimson Raven (P0008) + Emerald Raven (P0035),Team A,Emerald Crane (P0060) + Ivory Badger (P0059),0.8348854998279978,0.1651145001720022,
+Tabular,17,1,Emerald Badger (P0006) + Azure Otter (P0034),Ruby Owl (P0045) + Amber Crane (P0046),Team A,Emerald Badger (P0006) + Azure Otter (P0034),0.6823989338420574,0.3176010661579426,
+Tabular,17,2,Emerald Badger (P0006) + Ruby Owl (P0045),Azure Otter (P0034) + Amber Crane (P0046),Team A,Emerald Badger (P0006) + Ruby Owl (P0045),0.9412620950025886,0.05873790499741138,
+Tabular,17,3,Emerald Badger (P0006) + Amber Crane (P0046),Azure Otter (P0034) + Ruby Owl (P0045),Team B,Azure Otter (P0034) + Ruby Owl (P0045),0.0925716275249873,0.9074283724750127,
+Tabular,18,1,Amber Badger (P0013) + Ivory Fox (P0049),Amber Finch (P0102) + Crimson Falcon (P0104),Team A,Amber Badger (P0013) + Ivory Fox (P0049),0.9376928375854633,0.06230716241453671,
+Tabular,18,2,Amber Badger (P0013) + Amber Finch (P0102),Ivory Fox (P0049) + Crimson Falcon (P0104),Team B,Ivory Fox (P0049) + Crimson Falcon (P0104),0.1533832952031393,0.8466167047968607,
+Tabular,18,3,Amber Badger (P0013) + Crimson Falcon (P0104),Ivory Fox (P0049) + Amber Finch (P0102),Team B,Ivory Fox (P0049) + Amber Finch (P0102),0.4643147799910279,0.5356852200089721,
+Tabular,19,1,Bronze Finch (P0077) + Emerald Falcon (P0094),Coral Robin (P0020) + Amber Otter (P0081),Team B,Coral Robin (P0020) + Amber Otter (P0081),0.0131234111348549,0.9868765888651451,
+Tabular,19,2,Bronze Finch (P0077) + Coral Robin (P0020),Emerald Falcon (P0094) + Amber Otter (P0081),Team B,Emerald Falcon (P0094) + Amber Otter (P0081),0.2399731399419135,0.7600268600580864,
+Tabular,19,3,Bronze Finch (P0077) + Amber Otter (P0081),Emerald Falcon (P0094) + Coral Robin (P0020),Team B,Emerald Falcon (P0094) + Coral Robin (P0020),0.05340079439632397,0.946599205603676,
+Tabular,20,1,Lilac Lynx (P0044) + Lilac Badger (P0098),Ivory Panda (P0021) + Coral Falcon (P0001),Team B,Ivory Panda (P0021) + Coral Falcon (P0001),0.2442111590885821,0.755788840911418,
+Tabular,20,2,Lilac Lynx (P0044) + Ivory Panda (P0021),Lilac Badger (P0098) + Coral Falcon (P0001),Team B,Lilac Badger (P0098) + Coral Falcon (P0001),0.01269368751706797,0.987306312482932,
+Tabular,20,3,Lilac Lynx (P0044) + Coral Falcon (P0001),Lilac Badger (P0098) + Ivory Panda (P0021),Team A,Lilac Lynx (P0044) + Coral Falcon (P0001),0.6693125085966248,0.3306874914033752,
+Tabular,21,1,Crimson Dolphin (P0109) + Emerald Dolphin (P0099),Azure Owl (P0058) + Jade Panda (P0107),Team A,Crimson Dolphin (P0109) + Emerald Dolphin (P0099),0.7946592679828758,0.2053407320171242,
+Tabular,21,2,Crimson Dolphin (P0109) + Azure Owl (P0058),Emerald Dolphin (P0099) + Jade Panda (P0107),Team B,Emerald Dolphin (P0099) + Jade Panda (P0107),0.1832669611673761,0.8167330388326239,
+Tabular,21,3,Crimson Dolphin (P0109) + Jade Panda (P0107),Emerald Dolphin (P0099) + Azure Owl (P0058),Team B,Emerald Dolphin (P0099) + Azure Owl (P0058),0.4819141877566567,0.5180858122433434,
+Tabular,22,1,Jade Otter (P0054) + Olive Lynx (P0101),Lilac Owl (P0084) + Emerald Otter (P0026),Team A,Jade Otter (P0054) + Olive Lynx (P0101),0.7479229845196016,0.2520770154803984,P0026
+Tabular,22,2,Jade Otter (P0054) + Lilac Owl (P0084),Olive Lynx (P0101) + Emerald Otter (P0026),Team B,Olive Lynx (P0101) + Emerald Otter (P0026),0.08294216604441541,0.9170578339555846,P0026
+Tabular,22,3,Jade Otter (P0054) + Emerald Otter (P0026),Olive Lynx (P0101) + Lilac Owl (P0084),Team B,Olive Lynx (P0101) + Lilac Owl (P0084),0.0961158268232128,0.9038841731767872,P0026
+Tabular,23,1,Indigo Kestrel (P0072) + Jade Owl (P0096),Golden Heron (P0078) + Ruby Crane (P0065),Team B,Golden Heron (P0078) + Ruby Crane (P0065),0.04367861084560051,0.9563213891543995,P0072
+Tabular,23,2,Indigo Kestrel (P0072) + Golden Heron (P0078),Jade Owl (P0096) + Ruby Crane (P0065),Team A,Indigo Kestrel (P0072) + Golden Heron (P0078),0.9773847952797323,0.02261520472026768,P0072
+Tabular,23,3,Indigo Kestrel (P0072) + Ruby Crane (P0065),Jade Owl (P0096) + Golden Heron (P0078),Team B,Jade Owl (P0096) + Golden Heron (P0078),0.07025774542383098,0.929742254576169,P0072
+Tabular,24,1,Teal Falcon (P0030) + Ivory Raven (P0028),Lilac Crane (P0100) + Olive Badger (P0111),Team A,Teal Falcon (P0030) + Ivory Raven (P0028),0.9662684500819244,0.03373154991807559,
+Tabular,24,2,Teal Falcon (P0030) + Lilac Crane (P0100),Ivory Raven (P0028) + Olive Badger (P0111),Team B,Ivory Raven (P0028) + Olive Badger (P0111),0.04624033733618158,0.9537596626638184,
+Tabular,24,3,Teal Falcon (P0030) + Olive Badger (P0111),Ivory Raven (P0028) + Lilac Crane (P0100),Team B,Ivory Raven (P0028) + Lilac Crane (P0100),0.2555497809526685,0.7444502190473314,
+Tabular,25,1,Amber Lynx (P0005) + Jade Badger (P0055),Emerald Kestrel (P0076) + Indigo Raven (P0012),Team A,Amber Lynx (P0005) + Jade Badger (P0055),0.7587779334817666,0.2412220665182334,
+Tabular,25,2,Amber Lynx (P0005) + Emerald Kestrel (P0076),Jade Badger (P0055) + Indigo Raven (P0012),Team B,Jade Badger (P0055) + Indigo Raven (P0012),0.4634987068035922,0.5365012931964077,
+Tabular,25,3,Amber Lynx (P0005) + Indigo Raven (P0012),Jade Badger (P0055) + Emerald Kestrel (P0076),Team B,Jade Badger (P0055) + Emerald Kestrel (P0076),0.1820475089036373,0.8179524910963627,
+Tabular,26,1,Lilac Otter (P0070) + Silver Robin (P0105),Indigo Otter (P0087) + Silver Raven (P0014),Team A,Lilac Otter (P0070) + Silver Robin (P0105),0.9949012623681319,0.005098737631868078,
+Tabular,26,2,Lilac Otter (P0070) + Indigo Otter (P0087),Silver Robin (P0105) + Silver Raven (P0014),Team A,Lilac Otter (P0070) + Indigo Otter (P0087),0.9692335725209036,0.03076642747909641,
+Tabular,26,3,Lilac Otter (P0070) + Silver Raven (P0014),Silver Robin (P0105) + Indigo Otter (P0087),Team A,Lilac Otter (P0070) + Silver Raven (P0014),0.7092037809595743,0.2907962190404257,
+Tabular,27,1,Golden Jaguar (P0110) + Crimson Finch (P0018),Lilac Eagle (P0029) + Golden Falcon (P0032),Team A,Golden Jaguar (P0110) + Crimson Finch (P0018),0.984981733704836,0.01501826629516401,P0032
+Tabular,27,2,Golden Jaguar (P0110) + Lilac Eagle (P0029),Crimson Finch (P0018) + Golden Falcon (P0032),Team B,Crimson Finch (P0018) + Golden Falcon (P0032),0.3571681997010626,0.6428318002989374,P0032
+Tabular,27,3,Golden Jaguar (P0110) + Golden Falcon (P0032),Crimson Finch (P0018) + Lilac Eagle (P0029),Team A,Golden Jaguar (P0110) + Golden Falcon (P0032),0.8889727486612863,0.1110272513387137,P0032
+Tabular,28,1,Ruby Heron (P0036) + Ruby Falcon (P0095),Indigo Eagle (P0004) + Ivory Eagle (P0015),Team B,Indigo Eagle (P0004) + Ivory Eagle (P0015),0.08729722931933609,0.9127027706806639,P0095
+Tabular,28,2,Ruby Heron (P0036) + Indigo Eagle (P0004),Ruby Falcon (P0095) + Ivory Eagle (P0015),Team B,Ruby Falcon (P0095) + Ivory Eagle (P0015),0.07974015472035846,0.9202598452796416,P0095
+Tabular,28,3,Ruby Heron (P0036) + Ivory Eagle (P0015),Ruby Falcon (P0095) + Indigo Eagle (P0004),Team A,Ruby Heron (P0036) + Ivory Eagle (P0015),0.7949046187575723,0.2050953812424277,P0095
+Historical Games,1,1,Azure Falcon (P0027) + Bronze Eagle (P0016),Ruby Kestrel (P0031) + Ruby Robin (P0022),Team B,Ruby Kestrel (P0031) + Ruby Robin (P0022),0.4473118766081957,0.5526881233918043,
+Historical Games,1,2,Azure Falcon (P0027) + Ruby Kestrel (P0031),Bronze Eagle (P0016) + Ruby Robin (P0022),Team A,Azure Falcon (P0027) + Ruby Kestrel (P0031),0.6248356271312857,0.3751643728687143,
+Historical Games,1,3,Azure Falcon (P0027) + Ruby Robin (P0022),Bronze Eagle (P0016) + Ruby Kestrel (P0031),Team A,Azure Falcon (P0027) + Ruby Robin (P0022),0.5859527285249266,0.4140472714750734,
+Historical Games,2,1,Lilac Raven (P0048) + Amber Raven (P0071),Coral Panda (P0010) + Jade Heron (P0090),Team B,Coral Panda (P0010) + Jade Heron (P0090),0.4053323628853828,0.5946676371146171,
+Historical Games,2,2,Lilac Raven (P0048) + Coral Panda (P0010),Amber Raven (P0071) + Jade Heron (P0090),Team B,Amber Raven (P0071) + Jade Heron (P0090),0.3476317708770794,0.6523682291229206,
+Historical Games,2,3,Lilac Raven (P0048) + Jade Heron (P0090),Amber Raven (P0071) + Coral Panda (P0010),Team A,Lilac Raven (P0048) + Jade Heron (P0090),0.593313239401519,0.406686760598481,
+Historical Games,3,1,Violet Raven (P0017) + Lilac Panda (P0108),Azure Robin (P0042) + Olive Fox (P0091),Team B,Azure Robin (P0042) + Olive Fox (P0091),0.4446522691842362,0.5553477308157637,
+Historical Games,3,2,Violet Raven (P0017) + Azure Robin (P0042),Lilac Panda (P0108) + Olive Fox (P0091),Team A,Violet Raven (P0017) + Azure Robin (P0042),0.5465482184537256,0.4534517815462744,
+Historical Games,3,3,Violet Raven (P0017) + Olive Fox (P0091),Lilac Panda (P0108) + Azure Robin (P0042),Team B,Lilac Panda (P0108) + Azure Robin (P0042),0.2720567487607876,0.7279432512392124,
+Historical Games,4,1,Violet Panda (P0063) + Ruby Dolphin (P0080),Olive Panda (P0066) + Ivory Falcon (P0067),Team A,Violet Panda (P0063) + Ruby Dolphin (P0080),0.5272342519846739,0.4727657480153261,
+Historical Games,4,2,Violet Panda (P0063) + Olive Panda (P0066),Ruby Dolphin (P0080) + Ivory Falcon (P0067),Team A,Violet Panda (P0063) + Olive Panda (P0066),0.6963065265905616,0.3036934734094384,
+Historical Games,4,3,Violet Panda (P0063) + Ivory Falcon (P0067),Ruby Dolphin (P0080) + Olive Panda (P0066),Team B,Ruby Dolphin (P0080) + Olive Panda (P0066),0.4650736742457942,0.5349263257542058,
+Historical Games,5,1,Ruby Otter (P0002) + Lilac Robin (P0052),Indigo Lynx (P0088) + Crimson Jaguar (P0074),Team B,Indigo Lynx (P0088) + Crimson Jaguar (P0074),0.4478904566939074,0.5521095433060925,
+Historical Games,5,2,Ruby Otter (P0002) + Indigo Lynx (P0088),Lilac Robin (P0052) + Crimson Jaguar (P0074),Team B,Lilac Robin (P0052) + Crimson Jaguar (P0074),0.4541477938165052,0.5458522061834948,
+Historical Games,5,3,Ruby Otter (P0002) + Crimson Jaguar (P0074),Lilac Robin (P0052) + Indigo Lynx (P0088),Team A,Ruby Otter (P0002) + Crimson Jaguar (P0074),0.7103662873194582,0.2896337126805418,
+Historical Games,6,1,Emerald Owl (P0039) + Coral Kestrel (P0009),Olive Heron (P0051) + Emerald Panda (P0047),Team B,Olive Heron (P0051) + Emerald Panda (P0047),0.3143856963702348,0.6856143036297652,P0039
+Historical Games,6,2,Emerald Owl (P0039) + Olive Heron (P0051),Coral Kestrel (P0009) + Emerald Panda (P0047),Team A,Emerald Owl (P0039) + Olive Heron (P0051),0.557080560371167,0.442919439628833,P0039
+Historical Games,6,3,Emerald Owl (P0039) + Emerald Panda (P0047),Coral Kestrel (P0009) + Olive Heron (P0051),Team B,Coral Kestrel (P0009) + Olive Heron (P0051),0.425903048463769,0.5740969515362311,P0039
+Historical Games,7,1,Amber Robin (P0103) + Bronze Falcon (P0062),Bronze Owl (P0083) + Bronze Fox (P0033),Team B,Bronze Owl (P0083) + Bronze Fox (P0033),0.3368861201014198,0.6631138798985802,P0062
+Historical Games,7,2,Amber Robin (P0103) + Bronze Owl (P0083),Bronze Falcon (P0062) + Bronze Fox (P0033),Team A,Amber Robin (P0103) + Bronze Owl (P0083),0.5721504789781334,0.4278495210218666,P0062
+Historical Games,7,3,Amber Robin (P0103) + Bronze Fox (P0033),Bronze Falcon (P0062) + Bronze Owl (P0083),Team A,Amber Robin (P0103) + Bronze Fox (P0033),0.5523409923603821,0.4476590076396179,P0062
+Historical Games,8,1,Teal Owl (P0073) + Coral Finch (P0079),Teal Fox (P0075) + Azure Raven (P0086),Team A,Teal Owl (P0073) + Coral Finch (P0079),0.6210982216681794,0.3789017783318206,
+Historical Games,8,2,Teal Owl (P0073) + Teal Fox (P0075),Coral Finch (P0079) + Azure Raven (P0086),Team A,Teal Owl (P0073) + Teal Fox (P0075),0.6795303725903127,0.3204696274096873,
+Historical Games,8,3,Teal Owl (P0073) + Azure Raven (P0086),Coral Finch (P0079) + Teal Fox (P0075),Team A,Teal Owl (P0073) + Azure Raven (P0086),0.6535348051012912,0.3464651948987088,
+Historical Games,9,1,Bronze Dolphin (P0056) + Violet Badger (P0089),Jade Kestrel (P0023) + Jade Fox (P0038),Team A,Bronze Dolphin (P0056) + Violet Badger (P0089),0.5836800477547193,0.4163199522452807,
+Historical Games,9,2,Bronze Dolphin (P0056) + Jade Kestrel (P0023),Violet Badger (P0089) + Jade Fox (P0038),Team B,Violet Badger (P0089) + Jade Fox (P0038),0.4394579859384339,0.5605420140615661,
+Historical Games,9,3,Bronze Dolphin (P0056) + Jade Fox (P0038),Violet Badger (P0089) + Jade Kestrel (P0023),Team B,Violet Badger (P0089) + Jade Kestrel (P0023),0.4065738396113079,0.5934261603886921,
+Historical Games,10,1,Indigo Owl (P0011) + Bronze Kestrel (P0053),Ruby Fox (P0093) + Amber Jaguar (P0106),Team B,Ruby Fox (P0093) + Amber Jaguar (P0106),0.4391121585654816,0.5608878414345184,
+Historical Games,10,2,Indigo Owl (P0011) + Ruby Fox (P0093),Bronze Kestrel (P0053) + Amber Jaguar (P0106),Team A,Indigo Owl (P0011) + Ruby Fox (P0093),0.5523409923603821,0.4476590076396179,
+Historical Games,10,3,Indigo Owl (P0011) + Amber Jaguar (P0106),Bronze Kestrel (P0053) + Ruby Fox (P0093),Team B,Bronze Kestrel (P0053) + Ruby Fox (P0093),0.4541477938165052,0.5458522061834948,
+Historical Games,11,1,Jade Crane (P0061) + Azure Badger (P0007),Olive Robin (P0050) + Jade Jaguar (P0064),Team B,Olive Robin (P0050) + Jade Jaguar (P0064),0.4976599970796927,0.5023400029203073,
+Historical Games,11,2,Jade Crane (P0061) + Olive Robin (P0050),Azure Badger (P0007) + Jade Jaguar (P0064),Team A,Jade Crane (P0061) + Olive Robin (P0050),0.592070460012412,0.407929539987588,
+Historical Games,11,3,Jade Crane (P0061) + Jade Jaguar (P0064),Azure Badger (P0007) + Olive Robin (P0050),Team A,Jade Crane (P0061) + Jade Jaguar (P0064),0.5156729977215905,0.4843270022784095,
+Historical Games,12,1,Golden Dolphin (P0057) + Silver Fox (P0112),Emerald Jaguar (P0043) + Bronze Panda (P0003),Team B,Emerald Jaguar (P0043) + Bronze Panda (P0003),0.4056708281158523,0.5943291718841477,
+Historical Games,12,2,Golden Dolphin (P0057) + Emerald Jaguar (P0043),Silver Fox (P0112) + Bronze Panda (P0003),Team A,Golden Dolphin (P0057) + Emerald Jaguar (P0043),0.5306159126317426,0.4693840873682574,
+Historical Games,12,3,Golden Dolphin (P0057) + Bronze Panda (P0003),Silver Fox (P0112) + Emerald Jaguar (P0043),Team B,Silver Fox (P0112) + Emerald Jaguar (P0043),0.4475432916102205,0.5524567083897796,
+Historical Games,13,1,Coral Jaguar (P0097) + Crimson Robin (P0068),Lilac Finch (P0069) + Emerald Fox (P0037),Team B,Lilac Finch (P0069) + Emerald Fox (P0037),0.4385359111549034,0.5614640888450966,P0037
+Historical Games,13,2,Coral Jaguar (P0097) + Lilac Finch (P0069),Crimson Robin (P0068) + Emerald Fox (P0037),Team A,Coral Jaguar (P0097) + Lilac Finch (P0069),0.7582054092433034,0.2417945907566966,P0037
+Historical Games,13,3,Coral Jaguar (P0097) + Emerald Fox (P0037),Crimson Robin (P0068) + Lilac Finch (P0069),Team B,Crimson Robin (P0068) + Lilac Finch (P0069),0.4332424039214799,0.56675759607852,P0037
+Historical Games,14,1,Indigo Jaguar (P0024) + Golden Kestrel (P0040),Golden Robin (P0041) + Golden Owl (P0085),Team A,Indigo Jaguar (P0024) + Golden Kestrel (P0040),0.5592734798011777,0.4407265201988223,
+Historical Games,14,2,Indigo Jaguar (P0024) + Golden Robin (P0041),Golden Kestrel (P0040) + Golden Owl (P0085),Team A,Indigo Jaguar (P0024) + Golden Robin (P0041),0.6637408876273464,0.3362591123726536,
+Historical Games,14,3,Indigo Jaguar (P0024) + Golden Owl (P0085),Golden Kestrel (P0040) + Golden Robin (P0041),Team A,Indigo Jaguar (P0024) + Golden Owl (P0085),0.6121369932784038,0.3878630067215962,
+Historical Games,15,1,Azure Dolphin (P0019) + Violet Crane (P0113),Ivory Finch (P0092) + Golden Eagle (P0025),Team A,Azure Dolphin (P0019) + Violet Crane (P0113),0.5077214521144611,0.4922785478855389,
+Historical Games,15,2,Azure Dolphin (P0019) + Ivory Finch (P0092),Violet Crane (P0113) + Golden Eagle (P0025),Team A,Azure Dolphin (P0019) + Ivory Finch (P0092),0.7576902411134908,0.2423097588865092,
+Historical Games,15,3,Azure Dolphin (P0019) + Golden Eagle (P0025),Violet Crane (P0113) + Ivory Finch (P0092),Team A,Azure Dolphin (P0019) + Golden Eagle (P0025),0.5408590338552876,0.4591409661447124,
+Historical Games,16,1,Emerald Crane (P0060) + Crimson Raven (P0008),Emerald Raven (P0035) + Ivory Badger (P0059),Team A,Emerald Crane (P0060) + Crimson Raven (P0008),0.576840994693281,0.423159005306719,
+Historical Games,16,2,Emerald Crane (P0060) + Emerald Raven (P0035),Crimson Raven (P0008) + Ivory Badger (P0059),Team A,Emerald Crane (P0060) + Emerald Raven (P0035),0.6376892514695459,0.3623107485304541,
+Historical Games,16,3,Emerald Crane (P0060) + Ivory Badger (P0059),Crimson Raven (P0008) + Emerald Raven (P0035),Team B,Crimson Raven (P0008) + Emerald Raven (P0035),0.4528719101786132,0.5471280898213868,
+Historical Games,17,1,Emerald Badger (P0006) + Azure Otter (P0034),Ruby Owl (P0045) + Amber Crane (P0046),Team A,Emerald Badger (P0006) + Azure Otter (P0034),0.6103576516933902,0.3896423483066098,
+Historical Games,17,2,Emerald Badger (P0006) + Ruby Owl (P0045),Azure Otter (P0034) + Amber Crane (P0046),Team B,Azure Otter (P0034) + Amber Crane (P0046),0.4055579963949746,0.5944420036050253,
+Historical Games,17,3,Emerald Badger (P0006) + Amber Crane (P0046),Azure Otter (P0034) + Ruby Owl (P0045),Team B,Azure Otter (P0034) + Ruby Owl (P0045),0.3814382301089599,0.6185617698910401,
+Historical Games,18,1,Amber Badger (P0013) + Ivory Fox (P0049),Amber Finch (P0102) + Crimson Falcon (P0104),Team B,Amber Finch (P0102) + Crimson Falcon (P0104),0.4897053670434174,0.5102946329565826,
+Historical Games,18,2,Amber Badger (P0013) + Amber Finch (P0102),Ivory Fox (P0049) + Crimson Falcon (P0104),Team A,Amber Badger (P0013) + Amber Finch (P0102),0.5468961565337539,0.4531038434662461,
+Historical Games,18,3,Amber Badger (P0013) + Crimson Falcon (P0104),Ivory Fox (P0049) + Amber Finch (P0102),Team B,Ivory Fox (P0049) + Amber Finch (P0102),0.4698503632524264,0.5301496367475736,
+Historical Games,19,1,Bronze Finch (P0077) + Emerald Falcon (P0094),Coral Robin (P0020) + Amber Otter (P0081),Team A,Bronze Finch (P0077) + Emerald Falcon (P0094),0.602987230037783,0.397012769962217,
+Historical Games,19,2,Bronze Finch (P0077) + Coral Robin (P0020),Emerald Falcon (P0094) + Amber Otter (P0081),Team B,Emerald Falcon (P0094) + Amber Otter (P0081),0.3671904974421181,0.6328095025578819,
+Historical Games,19,3,Bronze Finch (P0077) + Amber Otter (P0081),Emerald Falcon (P0094) + Coral Robin (P0020),Team B,Emerald Falcon (P0094) + Coral Robin (P0020),0.3546692943743308,0.6453307056256692,
+Historical Games,20,1,Lilac Lynx (P0044) + Lilac Badger (P0098),Ivory Panda (P0021) + Coral Falcon (P0001),Team A,Lilac Lynx (P0044) + Lilac Badger (P0098),0.561579318487057,0.438420681512943,
+Historical Games,20,2,Lilac Lynx (P0044) + Ivory Panda (P0021),Lilac Badger (P0098) + Coral Falcon (P0001),Team B,Lilac Badger (P0098) + Coral Falcon (P0001),0.435196991924548,0.564803008075452,
+Historical Games,20,3,Lilac Lynx (P0044) + Coral Falcon (P0001),Lilac Badger (P0098) + Ivory Panda (P0021),Team A,Lilac Lynx (P0044) + Coral Falcon (P0001),0.5500254975466315,0.4499745024533685,
+Historical Games,21,1,Crimson Dolphin (P0109) + Emerald Dolphin (P0099),Azure Owl (P0058) + Jade Panda (P0107),Team B,Azure Owl (P0058) + Jade Panda (P0107),0.4641423562668013,0.5358576437331987,
+Historical Games,21,2,Crimson Dolphin (P0109) + Azure Owl (P0058),Emerald Dolphin (P0099) + Jade Panda (P0107),Team A,Crimson Dolphin (P0109) + Azure Owl (P0058),0.6534288287166169,0.3465711712833831,
+Historical Games,21,3,Crimson Dolphin (P0109) + Jade Panda (P0107),Emerald Dolphin (P0099) + Azure Owl (P0058),Team B,Emerald Dolphin (P0099) + Azure Owl (P0058),0.4622804768183847,0.5377195231816152,
+Historical Games,22,1,Jade Otter (P0054) + Olive Lynx (P0101),Lilac Owl (P0084) + Emerald Otter (P0026),Team B,Lilac Owl (P0084) + Emerald Otter (P0026),0.4380750324842276,0.5619249675157724,P0026
+Historical Games,22,2,Jade Otter (P0054) + Lilac Owl (P0084),Olive Lynx (P0101) + Emerald Otter (P0026),Team A,Jade Otter (P0054) + Lilac Owl (P0084),0.5761554213010692,0.4238445786989308,P0026
+Historical Games,22,3,Jade Otter (P0054) + Emerald Otter (P0026),Olive Lynx (P0101) + Lilac Owl (P0084),Team B,Olive Lynx (P0101) + Lilac Owl (P0084),0.3835384544941894,0.6164615455058107,P0026
+Historical Games,23,1,Indigo Kestrel (P0072) + Jade Owl (P0096),Golden Heron (P0078) + Ruby Crane (P0065),Team B,Golden Heron (P0078) + Ruby Crane (P0065),0.4067996914488226,0.5932003085511774,P0072
+Historical Games,23,2,Indigo Kestrel (P0072) + Golden Heron (P0078),Jade Owl (P0096) + Ruby Crane (P0065),Team A,Indigo Kestrel (P0072) + Golden Heron (P0078),0.5487510443841251,0.4512489556158749,P0072
+Historical Games,23,3,Indigo Kestrel (P0072) + Ruby Crane (P0065),Jade Owl (P0096) + Golden Heron (P0078),Team B,Jade Owl (P0096) + Golden Heron (P0078),0.4473118766081957,0.5526881233918043,P0072
+Historical Games,24,1,Teal Falcon (P0030) + Ivory Raven (P0028),Lilac Crane (P0100) + Olive Badger (P0111),Team A,Teal Falcon (P0030) + Ivory Raven (P0028),0.6287767204528344,0.3712232795471656,
+Historical Games,24,2,Teal Falcon (P0030) + Lilac Crane (P0100),Ivory Raven (P0028) + Olive Badger (P0111),Team A,Teal Falcon (P0030) + Lilac Crane (P0100),0.5708898016312338,0.4291101983687662,
+Historical Games,24,3,Teal Falcon (P0030) + Olive Badger (P0111),Ivory Raven (P0028) + Lilac Crane (P0100),Team A,Teal Falcon (P0030) + Olive Badger (P0111),0.625493641978573,0.374506358021427,
+Historical Games,25,1,Amber Lynx (P0005) + Jade Badger (P0055),Emerald Kestrel (P0076) + Indigo Raven (P0012),Team A,Amber Lynx (P0005) + Jade Badger (P0055),0.5077214521144611,0.4922785478855389,
+Historical Games,25,2,Amber Lynx (P0005) + Emerald Kestrel (P0076),Jade Badger (P0055) + Indigo Raven (P0012),Team B,Jade Badger (P0055) + Indigo Raven (P0012),0.4929804012266019,0.5070195987733981,
+Historical Games,25,3,Amber Lynx (P0005) + Indigo Raven (P0012),Jade Badger (P0055) + Emerald Kestrel (P0076),Team B,Jade Badger (P0055) + Emerald Kestrel (P0076),0.3081652602142079,0.691834739785792,
+Historical Games,26,1,Lilac Otter (P0070) + Silver Robin (P0105),Indigo Otter (P0087) + Silver Raven (P0014),Team A,Lilac Otter (P0070) + Silver Robin (P0105),0.5047968938311104,0.4952031061688896,
+Historical Games,26,2,Lilac Otter (P0070) + Indigo Otter (P0087),Silver Robin (P0105) + Silver Raven (P0014),Team A,Lilac Otter (P0070) + Indigo Otter (P0087),0.5817454641552594,0.4182545358447406,
+Historical Games,26,3,Lilac Otter (P0070) + Silver Raven (P0014),Silver Robin (P0105) + Indigo Otter (P0087),Team B,Silver Robin (P0105) + Indigo Otter (P0087),0.4643751625723555,0.5356248374276444,
+Historical Games,27,1,Golden Jaguar (P0110) + Crimson Finch (P0018),Lilac Eagle (P0029) + Golden Falcon (P0032),Team B,Lilac Eagle (P0029) + Golden Falcon (P0032),0.3813278139197522,0.6186721860802478,P0032
+Historical Games,27,2,Golden Jaguar (P0110) + Lilac Eagle (P0029),Crimson Finch (P0018) + Golden Falcon (P0032),Team A,Golden Jaguar (P0110) + Lilac Eagle (P0029),0.6344391691068478,0.3655608308931522,P0032
+Historical Games,27,3,Golden Jaguar (P0110) + Golden Falcon (P0032),Crimson Finch (P0018) + Lilac Eagle (P0029),Team B,Crimson Finch (P0018) + Lilac Eagle (P0029),0.3716603443124749,0.6283396556875251,P0032
+Historical Games,28,1,Ruby Heron (P0036) + Ruby Falcon (P0095),Indigo Eagle (P0004) + Ivory Eagle (P0015),Team B,Indigo Eagle (P0004) + Ivory Eagle (P0015),0.3308493642704788,0.6691506357295212,P0095
+Historical Games,28,2,Ruby Heron (P0036) + Indigo Eagle (P0004),Ruby Falcon (P0095) + Ivory Eagle (P0015),Team A,Ruby Heron (P0036) + Indigo Eagle (P0004),0.5409752513167947,0.4590247486832053,P0095
+Historical Games,28,3,Ruby Heron (P0036) + Ivory Eagle (P0015),Ruby Falcon (P0095) + Indigo Eagle (P0004),Team B,Ruby Falcon (P0095) + Indigo Eagle (P0004),0.4814054203942182,0.5185945796057818,P0095
