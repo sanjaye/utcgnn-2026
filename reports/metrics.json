@@ -1,0 +1,339 @@
+{
+  "seed": 42,
+  "epochs_requested": 60,
+  "audit": {
+    "players": 113,
+    "raw_sets": 3518,
+    "flagged_sets": 41,
+    "flag_counts": {
+      "weekly_sets_won_mismatch": 30,
+      "incomplete_court_results": 5,
+      "weekly_games_mismatch": 3,
+      "attendance_award_with_scores": 3
+    },
+    "excluded_sets": 41,
+    "policy": "exclude_all_flagged",
+    "time_resolution": "session_date; all sets on a date predicted together",
+    "used_sets": 3477,
+    "seasons": {
+      "2023-Jul-Dec": 285,
+      "2024-Jan-Jun": 441,
+      "2024-Jul-Dec": 429,
+      "2025-Jan-Jun": 630,
+      "2025-Jul-Dec": 609,
+      "2026-Jan-Jun": 723,
+      "2026-Jul-Dec": 360
+    }
+  },
+  "splits": {
+    "train": [
+      "2023-Jul-Dec",
+      "2024-Jan-Jun",
+      "2024-Jul-Dec",
+      "2025-Jan-Jun",
+      "2025-Jul-Dec"
+    ],
+    "validation": [
+      "2026-Jan-Jun"
+    ],
+    "test": [
+      "2026-Jul-Dec"
+    ]
+  },
+  "protocol": "Frozen model weights; session-batched online history updates after all predictions on a date. Earlier validation/test results may inform later sessions, never the same session.",
+  "features": [
+    "log_sets",
+    "smoothed_win_rate",
+    "game_share",
+    "elo_scaled",
+    "log_games_per_set"
+  ],
+  "models": {
+    "rgcn": {
+      "selected_epoch": 55,
+      "train": {
+        "n": 2394,
+        "accuracy": 0.7660818713450293,
+        "roc_auc": 0.8463372733853476,
+        "log_loss": 0.4872907861028284,
+        "cold_start": {
+          "n": 162,
+          "accuracy": 0.6666666666666666,
+          "roc_auc": 0.707463144963145,
+          "log_loss": 0.656540586427614
+        },
+        "established": {
+          "n": 2232,
+          "accuracy": 0.7732974910394266,
+          "roc_auc": 0.8553674231501125,
+          "log_loss": 0.4750065264018359
+        }
+      },
+      "validation": {
+        "n": 723,
+        "accuracy": 0.73582295988935,
+        "roc_auc": 0.8235789280357525,
+        "log_loss": 0.5154447645715347,
+        "cold_start": {
+          "n": 24,
+          "accuracy": 0.5833333333333334,
+          "roc_auc": 0.6433566433566433,
+          "log_loss": 0.7961502843210617
+        },
+        "established": {
+          "n": 699,
+          "accuracy": 0.7410586552217453,
+          "roc_auc": 0.8297253925887111,
+          "log_loss": 0.5058068068118942
+        }
+      },
+      "test": {
+        "n": 360,
+        "accuracy": 0.7416666666666667,
+        "roc_auc": 0.8375568551007149,
+        "log_loss": 0.49878107457729326,
+        "cold_start": {
+          "n": 0,
+          "accuracy": null,
+          "roc_auc": null,
+          "log_loss": null
+        },
+        "established": {
+          "n": 360,
+          "accuracy": 0.7416666666666667,
+          "roc_auc": 0.8375568551007149,
+          "log_loss": 0.49878107457729326
+        }
+      }
+    },
+    "sage": {
+      "selected_epoch": 52,
+      "train": {
+        "n": 2394,
+        "accuracy": 0.7606516290726817,
+        "roc_auc": 0.841036945928004,
+        "log_loss": 0.493312613130434,
+        "cold_start": {
+          "n": 162,
+          "accuracy": 0.6419753086419753,
+          "roc_auc": 0.7016277641277642,
+          "log_loss": 0.65189498932156
+        },
+        "established": {
+          "n": 2232,
+          "accuracy": 0.7692652329749103,
+          "roc_auc": 0.8497269317799356,
+          "log_loss": 0.4818026019552716
+        }
+      },
+      "validation": {
+        "n": 723,
+        "accuracy": 0.7441217150760719,
+        "roc_auc": 0.8224693134163885,
+        "log_loss": 0.5146718489121889,
+        "cold_start": {
+          "n": 24,
+          "accuracy": 0.5416666666666666,
+          "roc_auc": 0.6433566433566433,
+          "log_loss": 0.8352599214006498
+        },
+        "established": {
+          "n": 699,
+          "accuracy": 0.7510729613733905,
+          "roc_auc": 0.8293160195844046,
+          "log_loss": 0.5036645331185935
+        }
+      },
+      "test": {
+        "n": 360,
+        "accuracy": 0.7666666666666667,
+        "roc_auc": 0.8446734119248738,
+        "log_loss": 0.48922367950048035,
+        "cold_start": {
+          "n": 0,
+          "accuracy": null,
+          "roc_auc": null,
+          "log_loss": null
+        },
+        "established": {
+          "n": 360,
+          "accuracy": 0.7666666666666667,
+          "roc_auc": 0.8446734119248738,
+          "log_loss": 0.48922367950048035
+        }
+      }
+    },
+    "elo": {
+      "train": {
+        "n": 2394,
+        "accuracy": 0.7259816207184628,
+        "roc_auc": 0.7952609781278599,
+        "log_loss": 0.5661048308129555,
+        "cold_start": {
+          "n": 162,
+          "accuracy": 0.5925925925925926,
+          "roc_auc": 0.6316031941031942,
+          "log_loss": 0.6794458120960328
+        },
+        "established": {
+          "n": 2232,
+          "accuracy": 0.735663082437276,
+          "roc_auc": 0.8048375527239751,
+          "log_loss": 0.5578784692682159
+        }
+      },
+      "validation": {
+        "n": 723,
+        "accuracy": 0.7233748271092669,
+        "roc_auc": 0.8033762894487129,
+        "log_loss": 0.5426814313043316,
+        "cold_start": {
+          "n": 24,
+          "accuracy": 0.5,
+          "roc_auc": 0.6083916083916084,
+          "log_loss": 0.7236751872339179
+        },
+        "established": {
+          "n": 699,
+          "accuracy": 0.7310443490701002,
+          "roc_auc": 0.8102556125038891,
+          "log_loss": 0.5364670534183372
+        }
+      },
+      "test": {
+        "n": 360,
+        "accuracy": 0.7277777777777777,
+        "roc_auc": 0.8256752993595098,
+        "log_loss": 0.518577172480186,
+        "cold_start": {
+          "n": 0,
+          "accuracy": null,
+          "roc_auc": null,
+          "log_loss": null
+        },
+        "established": {
+          "n": 360,
+          "accuracy": 0.7277777777777777,
+          "roc_auc": 0.8256752993595098,
+          "log_loss": 0.518577172480186
+        }
+      }
+    },
+    "tabular": {
+      "train": {
+        "n": 2394,
+        "accuracy": 0.7284878863826232,
+        "roc_auc": 0.8134903211259898,
+        "log_loss": 0.5269365096896474,
+        "cold_start": {
+          "n": 162,
+          "accuracy": 0.6419753086419753,
+          "roc_auc": 0.6822788697788698,
+          "log_loss": 0.6526431038179868
+        },
+        "established": {
+          "n": 2232,
+          "accuracy": 0.7347670250896058,
+          "roc_auc": 0.8220313319576167,
+          "log_loss": 0.5178126439867842
+        }
+      },
+      "validation": {
+        "n": 723,
+        "accuracy": 0.7261410788381742,
+        "roc_auc": 0.8166534023079983,
+        "log_loss": 0.5192566568585268,
+        "cold_start": {
+          "n": 24,
+          "accuracy": 0.625,
+          "roc_auc": 0.6223776223776224,
+          "log_loss": 0.75586197213623
+        },
+        "established": {
+          "n": 699,
+          "accuracy": 0.7296137339055794,
+          "roc_auc": 0.8234947354631645,
+          "log_loss": 0.511132869209507
+        }
+      },
+      "test": {
+        "n": 360,
+        "accuracy": 0.7416666666666667,
+        "roc_auc": 0.8347721154738698,
+        "log_loss": 0.5013367118681298,
+        "cold_start": {
+          "n": 0,
+          "accuracy": null,
+          "roc_auc": null,
+          "log_loss": null
+        },
+        "established": {
+          "n": 360,
+          "accuracy": 0.7416666666666667,
+          "roc_auc": 0.8347721154738698,
+          "log_loss": 0.5013367118681298
+        }
+      }
+    },
+    "historical_games": {
+      "train": {
+        "n": 2394,
+        "accuracy": 0.5388471177944862,
+        "roc_auc": 0.547925975513646,
+        "log_loss": 0.6903344044941753,
+        "cold_start": {
+          "n": 162,
+          "accuracy": 0.5432098765432098,
+          "roc_auc": 0.5491400491400492,
+          "log_loss": 0.691253076364788
+        },
+        "established": {
+          "n": 2232,
+          "accuracy": 0.5385304659498208,
+          "roc_auc": 0.5480024129928903,
+          "log_loss": 0.6902677266971147
+        }
+      },
+      "validation": {
+        "n": 723,
+        "accuracy": 0.47717842323651455,
+        "roc_auc": 0.45638066668707333,
+        "log_loss": 0.7133573788694211,
+        "cold_start": {
+          "n": 24,
+          "accuracy": 0.4583333333333333,
+          "roc_auc": 0.4825174825174825,
+          "log_loss": 0.71476776705773
+        },
+        "established": {
+          "n": 699,
+          "accuracy": 0.47782546494992845,
+          "roc_auc": 0.45642633742160504,
+          "log_loss": 0.7133089535238998
+        }
+      },
+      "test": {
+        "n": 360,
+        "accuracy": 0.49444444444444446,
+        "roc_auc": 0.4864321297069836,
+        "log_loss": 0.7087027809899897,
+        "cold_start": {
+          "n": 0,
+          "accuracy": null,
+          "roc_auc": null,
+          "log_loss": null
+        },
+        "established": {
+          "n": 360,
+          "accuracy": 0.49444444444444446,
+          "roc_auc": 0.4864321297069836,
+          "log_loss": 0.7087027809899897
+        }
+      }
+    }
+  },
+  "ranking_evaluation": {
+    "status": "unavailable",
+    "reason": "Official standings and attendance awards were not supplied; no official Spearman/top-four claim."
+  }
+}
