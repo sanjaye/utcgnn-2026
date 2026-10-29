@@ -25,12 +25,26 @@ Put the two inputs under `data/` (already done locally). From the repository:
 /workspace/utcgnn-venv/bin/python -m utcgnn train --epochs 60 --rolling --output artifacts/rolling
 /workspace/utcgnn-venv/bin/python -m utcgnn predict --date 2026-10-17 \
   --team-a P0002 P0074 --team-b P0009 P0063
+# Predict the 24 explicit matches (three pairings per court).
+/workspace/utcgnn-venv/bin/python -m utcgnn predict-day --date 2026-11-07 \
+  --groups data/matchday_groups.csv
 ```
 
 Use `.venv/bin/python` instead of the environment path when installed elsewhere.
 Global input options precede the subcommand, e.g.
 `python -m utcgnn --matches alternate.csv --include-flagged train`.
 The optional flagged-row sensitivity run should use its own output directory.
+
+For `predict-day`, create a CSV with the columns
+`court,pairing,team_a_1,team_a_2,team_b_1,team_b_2`, one row per match. Use
+registered player IDs; the file must contain eight courts, three matches per
+court, and 32 distinct players. Each court's three rows must cover all possible
+two-versus-two pairings for its four players. Predictions are written to
+`artifacts/matchday_predictions.csv` by default, with both team win probabilities
+and each player's pseudonym and actual name from `data/players.csv`. Override
+the name registry with `--names` or the output path with `--output`. As with
+single-match prediction, the match date must be after the model-selection
+period, and only earlier match history is used.
 
 ## Graph and model
 

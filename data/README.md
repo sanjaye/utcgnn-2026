@@ -12,3 +12,12 @@ Optional `validation_flags` controls default exclusion. Other source columns
 are retained in the input but never model inputs. Scores/outcomes update history
 only after the entire local calendar session. Dates come from the local date
 portion of timestamp, preserving UTC's session day across timezone offsets.
+
+## Randomized match-day input
+
+`predict-day` takes a CSV with one row per match and these columns:
+`court,pairing,team_a_1,team_a_2,team_b_1,team_b_2`. Supply eight courts with
+three rows per court, covering all possible doubles team splits for that
+court's four players, and 32 distinct registered player IDs overall. Player
+IDs are looked up in `players.csv`; that file must include `player_id`,
+`original_name`, and `pseudonym`.
