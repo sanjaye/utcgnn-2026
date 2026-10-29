@@ -2,12 +2,10 @@ import argparse
 import json
 from pathlib import Path
 
-import pandas as pd
-import torch
-
-from .data import History, export_graph, load_data, season_splits
+from .data import export_graph, load_data, season_splits
 from .experiment import run_experiment
-from .models import GraphModel
+from .inference import load_inference_context, predict_teams
+from .matchday import load_matchday_groups, load_name_registry, predict_matchday
 
 
 def main():
@@ -28,6 +26,12 @@ def main():
     p.add_argument('--date',required=True,help='Session date, YYYY-MM-DD; use strictly earlier history')
     p.add_argument('--team-a',nargs=2,required=True)
     p.add_argument('--team-b',nargs=2,required=True)
+    p = commands.add_parser('predict-day',help='Predict all doubles pairings for eight court groups')
+    p.add_argument('--checkpoint',default='artifacts/main/rgcn.pt')
+    p.add_argument('--date',required=True,help='Match-day date, YYYY-MM-DD')
+    p.add_argument('--groups',required=True,help='CSV with one court and four player IDs per row')
+    p.add_argument('--names',default='data/players.csv',help='CSV containing player_id, original_name, pseudonym')
+    p.add_argument('--output',default='artifacts/matchday_predictions.csv')
     args = parser.parse_args()
     players,matches,audit = load_data(args.players,args.matches,args.include_flagged)
     if args.command == 'profile':
@@ -43,29 +47,33 @@ def main():
                 subset = matches[matches.season.isin(seasons[:end])].copy()
                 fold_audit = dict(audit,used_sets=len(subset),seasons=subset.groupby('season').size().to_dict())
                 run_experiment(players,subset,fold_audit,Path(args.output)/f'fold_{end}',args.epochs,args.seed)
-    else:
-        checkpoint = torch.load(args.checkpoint,map_location='cpu',weights_only=True)
-        if players.player_id.tolist() != checkpoint['player_ids']:
-            raise ValueError('Checkpoint player registry differs from input')
-        if args.include_flagged != checkpoint['include_flagged']:
-            raise ValueError('Use the same flagged-row policy as training')
-        date = pd.Timestamp(args.date)
-        if date <= pd.Timestamp(checkpoint['selection_end']):
-            raise ValueError('Prediction must be after validation/model-selection data to avoid weight leakage')
+    elif args.command == 'predict':
+        h, model, checkpoint = load_inference_context(
+            players, matches, args.checkpoint, args.date, args.include_flagged
+        )
         ids = args.team_a+args.team_b
         if len(set(ids)) != 4 or not set(ids) <= set(players.player_id):
             raise ValueError('Supply four distinct registered player IDs')
-        h = History(players)
-        for _,rows in matches[matches.session < date].groupby('session',sort=True):
-            h.update(rows)
-        model = GraphModel(kind=checkpoint['kind'])
-        model.load_state_dict(checkpoint['state_dict'])
-        model.eval()
-        with torch.no_grad():
-            t = torch.tensor([[h.lookup[p] for p in ids]])
-            p = torch.sigmoid(model((h.features()-checkpoint['mean'])/checkpoint['scale'],h.relations(),t)).item()
+        p = predict_teams(h, model, checkpoint, [ids])[0]
         print(json.dumps({'team_a_win_probability':p,'date':args.date,
-                          'cold_start_players':[p for p in ids if h.sets[h.lookup[p]]==0]}))
+                          'cold_start_players':[player_id for player_id in ids
+                                                if h.sets[h.lookup[player_id]]==0]}))
+    else:
+        groups = load_matchday_groups(args.groups, players.player_id)
+        names = load_name_registry(args.names, players.player_id)
+        history, model, checkpoint = load_inference_context(
+            players, matches, args.checkpoint, args.date, args.include_flagged
+        )
+        predictions = predict_matchday(
+            groups, names, history, model, checkpoint, args.date
+        )
+        output = Path(args.output)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        predictions.to_csv(output, index=False)
+        print(json.dumps({
+            'output': str(output),
+            'predictions': json.loads(predictions.to_json(orient='records')),
+        }, indent=2))
 
 
 if __name__ == '__main__':

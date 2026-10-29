@@ -9,6 +9,8 @@ import torch
 
 from utcgnn.data import History, SLOTS, export_graph, load_data, season_splits, snapshots
 from utcgnn.experiment import run_experiment
+from utcgnn.inference import load_inference_context, predict_teams
+from utcgnn.matchday import PAIRINGS, load_matchday_groups, load_name_registry, predict_matchday
 from utcgnn.models import GraphModel
 
 
@@ -74,6 +76,77 @@ class TemporalTests(unittest.TestCase):
             torch.testing.assert_close(a,b)
             torch.testing.assert_close(a,-c)
 
+    def test_matchday_predicts_all_pairings_with_both_names(self):
+        ids = [f'p{i:02}' for i in range(32)]
+        players = pd.DataFrame({'player_id':ids})
+        history = History(players)
+        model = GraphModel()
+        checkpoint = {'mean':torch.zeros(5),'scale':torch.ones(5)}
+        groups = pd.DataFrame([
+            {
+                'court':f'Court {court+1}',
+                'pairing':pairing_number,
+                'team_a_1':ids[court*4+team_a[0]],
+                'team_a_2':ids[court*4+team_a[1]],
+                'team_b_1':ids[court*4+team_b[0]],
+                'team_b_2':ids[court*4+team_b[1]],
+            }
+            for court in range(8)
+            for pairing_number,(team_a,team_b) in enumerate(PAIRINGS,start=1)
+        ])
+        names = pd.DataFrame({
+            'original_name':[f'Actual {player_id}' for player_id in ids],
+            'pseudonym':[f'Alias {player_id}' for player_id in ids],
+        },index=pd.Index(ids,name='player_id'))
+
+        predictions = predict_matchday(
+            groups,names,history,model,checkpoint,'2026-11-07'
+        )
+
+        self.assertEqual(len(predictions),24)
+        self.assertEqual(predictions.court.nunique(),8)
+        self.assertEqual(predictions.iloc[0].pairing,1)
+        self.assertEqual(predictions.iloc[0].team_a_player_1_id,'p00')
+        self.assertEqual(predictions.iloc[0].team_a_player_2_id,'p01')
+        self.assertEqual(predictions.iloc[1].team_a_player_2_id,'p02')
+        self.assertEqual(predictions.iloc[2].team_a_player_2_id,'p03')
+        self.assertEqual(predictions.iloc[0].team_a_player_1_pseudonym,'Alias p00')
+        self.assertEqual(predictions.iloc[0].team_a_player_1_actual_name,'Actual p00')
+        self.assertAlmostEqual(predictions.iloc[0].team_a_win_probability,0.5)
+        self.assertTrue(predictions.cold_start.all())
+
+    def test_matchday_loader_requires_all_pairings_and_32_registered_players(self):
+        ids = [f'p{i:02}' for i in range(32)]
+        groups = pd.DataFrame([
+            {
+                'court':f'Court {court+1}',
+                'pairing':pairing_number,
+                'team_a_1':ids[court*4+team_a[0]],
+                'team_a_2':ids[court*4+team_a[1]],
+                'team_b_1':ids[court*4+team_b[0]],
+                'team_b_2':ids[court*4+team_b[1]],
+            }
+            for court in range(8)
+            for pairing_number,(team_a,team_b) in enumerate(PAIRINGS,start=1)
+        ])
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp)/'groups.csv'
+            groups.to_csv(path,index=False)
+            loaded = load_matchday_groups(path,ids)
+            self.assertEqual(len(loaded),24)
+            name_path = Path(tmp)/'players.csv'
+            pd.DataFrame({
+                'player_id':ids[::-1],
+                'original_name':[f'Actual {player_id}' for player_id in ids[::-1]],
+                'pseudonym':[f'Alias {player_id}' for player_id in ids[::-1]],
+            }).to_csv(name_path,index=False)
+            names = load_name_registry(name_path,ids)
+            self.assertEqual(names.loc['p00'].original_name,'Actual p00')
+            groups.loc[0,'pairing'] = 2
+            groups.to_csv(path,index=False)
+            with self.assertRaisesRegex(ValueError,'one row for each pairing'):
+                load_matchday_groups(path,ids)
+
     def test_season_overlap_rejected(self):
         _,m = fixture()
         self.assertEqual(season_splits(m),['2023','2024','2025'])
@@ -119,6 +192,11 @@ class TemporalTests(unittest.TestCase):
             predictions = pd.read_csv(Path(tmp)/'test_predictions.csv')
             self.assertTrue(np.isfinite(predictions.rgcn).all())
             self.assertTrue(predictions.rgcn.between(0,1).all())
+            history,model,checkpoint = load_inference_context(
+                p,m,Path(tmp)/'rgcn.pt','2025-01-03',False
+            )
+            probability = predict_teams(history,model,checkpoint,[['p1','p2','p3','p4']])[0]
+            self.assertTrue(0 <= probability <= 1)
 
 
 if __name__ == '__main__':
