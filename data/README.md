@@ -16,8 +16,9 @@ portion of timestamp, preserving UTC's session day across timezone offsets.
 ## Randomized match-day input
 
 `predict-day` takes a CSV with one row per match and these columns:
-`court,pairing,team_a_1,team_a_2,team_b_1,team_b_2`. Supply eight courts with
-three rows per court, covering all possible doubles team splits for that
-court's four players, and 32 distinct registered player IDs overall. Player
-IDs are looked up in `players.csv`; that file must include `player_id`,
-`original_name`, and `pseudonym`.
+`court,pairing,team_a_1,team_a_2,team_b_1,team_b_2`. Use as many four-player
+courts as possible from the registered player list; at most three players are
+left unassigned. Include three rows per court, covering all possible doubles
+team splits for that court's four players. Player IDs are looked up in
+`players.csv`; that file must include `player_id`, `original_name`, and
+`pseudonym`.

@@ -10,7 +10,13 @@ import torch
 from utcgnn.data import History, SLOTS, export_graph, load_data, season_splits, snapshots
 from utcgnn.experiment import run_experiment
 from utcgnn.inference import load_inference_context, predict_teams
-from utcgnn.matchday import PAIRINGS, load_matchday_groups, load_name_registry, predict_matchday
+from utcgnn.matchday import (
+    PAIRINGS,
+    load_matchday_groups,
+    load_name_registry,
+    predict_matchday,
+    unassigned_player_ids,
+)
 from utcgnn.models import GraphModel
 
 
@@ -115,8 +121,8 @@ class TemporalTests(unittest.TestCase):
         self.assertAlmostEqual(predictions.iloc[0].team_a_win_probability,0.5)
         self.assertTrue(predictions.cold_start.all())
 
-    def test_matchday_loader_requires_all_pairings_and_32_registered_players(self):
-        ids = [f'p{i:02}' for i in range(32)]
+    def test_matchday_loader_sizes_courts_from_registry_and_reports_remainder(self):
+        ids = [f'p{i:02}' for i in range(43)]
         groups = pd.DataFrame([
             {
                 'court':f'Court {court+1}',
@@ -126,14 +132,16 @@ class TemporalTests(unittest.TestCase):
                 'team_b_1':ids[court*4+team_b[0]],
                 'team_b_2':ids[court*4+team_b[1]],
             }
-            for court in range(8)
+            for court in range(len(ids)//4)
             for pairing_number,(team_a,team_b) in enumerate(PAIRINGS,start=1)
         ])
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp)/'groups.csv'
             groups.to_csv(path,index=False)
             loaded = load_matchday_groups(path,ids)
-            self.assertEqual(len(loaded),24)
+            self.assertEqual(len(loaded),30)
+            self.assertEqual(loaded.court.nunique(),10)
+            self.assertEqual(unassigned_player_ids(loaded,ids),ids[40:])
             name_path = Path(tmp)/'players.csv'
             pd.DataFrame({
                 'player_id':ids[::-1],

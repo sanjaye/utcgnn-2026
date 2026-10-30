@@ -2,10 +2,17 @@ import argparse
 import json
 from pathlib import Path
 
+import pandas as pd
+
 from .data import export_graph, load_data, season_splits
 from .experiment import run_experiment
 from .inference import load_inference_context, predict_teams
-from .matchday import load_matchday_groups, load_name_registry, predict_matchday
+from .matchday import (
+    load_matchday_groups,
+    load_name_registry,
+    predict_matchday,
+    unassigned_player_ids,
+)
 
 
 def main():
@@ -26,12 +33,13 @@ def main():
     p.add_argument('--date',required=True,help='Session date, YYYY-MM-DD; use strictly earlier history')
     p.add_argument('--team-a',nargs=2,required=True)
     p.add_argument('--team-b',nargs=2,required=True)
-    p = commands.add_parser('predict-day',help='Predict all doubles pairings for eight court groups')
+    p = commands.add_parser('predict-day',help='Predict all doubles pairings for randomized court groups')
     p.add_argument('--checkpoint',default='artifacts/main/rgcn.pt')
     p.add_argument('--date',required=True,help='Match-day date, YYYY-MM-DD')
     p.add_argument('--groups',required=True,help='CSV with one court and four player IDs per row')
     p.add_argument('--names',default='data/players.csv',help='CSV containing player_id, original_name, pseudonym')
     p.add_argument('--output',default='artifacts/matchday_predictions.csv')
+    p.add_argument('--unassigned-output',default='artifacts/matchday_unassigned_players.csv')
     args = parser.parse_args()
     players,matches,audit = load_data(args.players,args.matches,args.include_flagged)
     if args.command == 'profile':
@@ -67,11 +75,28 @@ def main():
         predictions = predict_matchday(
             groups, names, history, model, checkpoint, args.date
         )
+        unassigned_ids = unassigned_player_ids(groups, players.player_id)
+        unassigned = pd.DataFrame([
+            {
+                'player_id':player_id,
+                'pseudonym':names.loc[player_id].pseudonym,
+                'actual_name':names.loc[player_id].original_name,
+            }
+            for player_id in unassigned_ids
+        ])
         output = Path(args.output)
         output.parent.mkdir(parents=True, exist_ok=True)
         predictions.to_csv(output, index=False)
+        unassigned_output = Path(args.unassigned_output)
+        unassigned_output.parent.mkdir(parents=True, exist_ok=True)
+        unassigned.to_csv(unassigned_output, index=False)
         print(json.dumps({
             'output': str(output),
+            'courts': groups.court.nunique(),
+            'matches': len(predictions),
+            'players_scheduled': len(players) - len(unassigned),
+            'unassigned_output': str(unassigned_output),
+            'unassigned_players': json.loads(unassigned.to_json(orient='records')),
             'predictions': json.loads(predictions.to_json(orient='records')),
         }, indent=2))
 

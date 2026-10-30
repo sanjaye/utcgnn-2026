@@ -20,13 +20,14 @@ def _partition(row):
 
 
 def load_matchday_groups(path, registered_ids):
+    registered_ids = set(registered_ids)
     groups = pd.read_csv(path, dtype=str, keep_default_na=False)
     missing = set(MATCH_COLUMNS) - set(groups.columns)
     if missing:
         raise ValueError(f'Match-day CSV is missing columns: {sorted(missing)}')
     groups = groups[MATCH_COLUMNS]
-    if len(groups) != 24:
-        raise ValueError(f'Match-day CSV must contain exactly 24 matchups; found {len(groups)}')
+    if len(groups) == 0 or len(groups) % 3:
+        raise ValueError('Match-day CSV must contain exactly 3 matches per court')
     if groups.isin(['']).any().any():
         raise ValueError('Court labels, pairing numbers, and player IDs must not be empty')
     if not groups.pairing.isin(['1', '2', '3']).all():
@@ -34,8 +35,9 @@ def load_matchday_groups(path, registered_ids):
     if groups.duplicated(['court', 'pairing']).any():
         raise ValueError('Each court must have exactly one row for each pairing number')
     court_counts = groups.groupby('court').size()
-    if len(court_counts) != 8 or not court_counts.eq(3).all():
-        raise ValueError('Match-day CSV must have 8 courts with exactly 3 matches per court')
+    if not court_counts.eq(3).all():
+        raise ValueError('Each court must have exactly 3 matches')
+    court_count = len(court_counts)
     player_columns = ['team_a_1', 'team_a_2', 'team_b_1', 'team_b_2']
     if (groups[player_columns].nunique(axis=1) != 4).any():
         raise ValueError('Each matchup must contain four distinct players')
@@ -55,12 +57,18 @@ def load_matchday_groups(path, registered_ids):
         observed = {_partition(row) for row in court_rows.itertuples(index=False)}
         if observed != expected:
             raise ValueError(f'{court} must include all three unique doubles pairings')
-    if len(all_ids) != 32:
-        raise ValueError('The eight court groups must contain 32 distinct players')
+    if len(all_ids) != court_count * 4:
+        raise ValueError(f'Match-day CSV must assign exactly 4 distinct players per court')
     unknown = set(all_ids) - set(registered_ids)
     if unknown:
         raise ValueError(f'Match-day CSV contains unregistered player IDs: {sorted(unknown)}')
     return groups
+
+
+def unassigned_player_ids(groups, registered_ids):
+    player_columns = ['team_a_1', 'team_a_2', 'team_b_1', 'team_b_2']
+    assigned = set(groups[player_columns].to_numpy().ravel())
+    return sorted(set(registered_ids) - assigned)
 
 
 def load_name_registry(path, registered_ids):

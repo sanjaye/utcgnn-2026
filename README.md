@@ -25,9 +25,11 @@ Put the two inputs under `data/` (already done locally). From the repository:
 /workspace/utcgnn-venv/bin/python -m utcgnn train --epochs 60 --rolling --output artifacts/rolling
 /workspace/utcgnn-venv/bin/python -m utcgnn predict --date 2026-10-17 \
   --team-a P0002 P0074 --team-b P0009 P0063
-# Predict the 24 explicit matches (three pairings per court).
+# Predict all explicit matches (three pairings per court).
 /workspace/utcgnn-venv/bin/python -m utcgnn predict-day --date 2026-11-07 \
   --groups data/matchday_groups.csv
+# Add a separate exact-score prediction file without changing match predictions.
+/workspace/utcgnn-venv/bin/python -m utcgnn.score_prediction
 ```
 
 Use `.venv/bin/python` instead of the environment path when installed elsewhere.
@@ -36,15 +38,32 @@ Global input options precede the subcommand, e.g.
 The optional flagged-row sensitivity run should use its own output directory.
 
 For `predict-day`, create a CSV with the columns
-`court,pairing,team_a_1,team_a_2,team_b_1,team_b_2`, one row per match. Use
-registered player IDs; the file must contain eight courts, three matches per
-court, and 32 distinct players. Each court's three rows must cover all possible
-two-versus-two pairings for its four players. Predictions are written to
+`court,pairing,team_a_1,team_a_2,team_b_1,team_b_2`, one row per match. Players
+are divided into as many four-player courts as possible; up to three players
+may remain unassigned. The file must contain three rows per court, with each
+court's rows covering all possible two-versus-two pairings for its four players.
+Predictions are written to
 `artifacts/matchday_predictions.csv` by default, with both team win probabilities
 and each player's pseudonym and actual name from `data/players.csv`. Override
-the name registry with `--names` or the output path with `--output`. As with
-single-match prediction, the match date must be after the model-selection
-period, and only earlier match history is used.
+the name registry with `--names` or the output path with `--output`. Any
+unassigned players and their names are written to
+`artifacts/matchday_unassigned_players.csv` by default. As with single-match
+prediction, the match date must be after the model-selection period, and only
+earlier match history is used.
+
+For exact set scores, run `python -m utcgnn.score_prediction`. It reads
+`artifacts/matchday_predictions.csv`, uses matches strictly before that file's
+date to train a separate symmetry-aware scoreline classifier, and writes
+`artifacts/matchday_score_predictions.csv` plus a training summary JSON. This
+score output is separate from the win-probability file. The companion
+`artifacts/matchday_score_predictions.xlsx` workbook has a `Match predictions`
+tab and a `Player totals` tab. Player totals sum that player's team's predicted
+points across their three pairing matches and include predicted wins/losses.
+Scorelines are learned
+from historical results and currently allow 6-0 through 6-4 and 7-5 or 7-6,
+including 6-0 because it occurs in the source results. The output includes a
+most-likely score, its probability, expected team points, and winner/loser
+points.
 
 ## Graph and model
 
