@@ -65,6 +65,69 @@ including 6-0 because it occurs in the source results. The output includes a
 most-likely score, its probability, expected team points, and winner/loser
 points.
 
+## Weekly workbook predictions and actual-results comparison
+
+Use the reusable `utcgnn.workbook` commands to prepare inputs and evaluate
+results. No date-specific Python script is needed. The workbook layout has
+headers on row 4, player names in column B, court numbers in G, individual
+set scores in I:K, and weekly games/sets won in L:M. The player table ends
+at its first blank name. Blank courts and court 0 are excluded. Each assigned
+court must contain four registered players.
+
+The following PowerShell commands reproduce the October 30 run on this Windows
+checkout. Substitute your Python interpreter on other systems.
+
+```powershell
+# 1. Convert 103026 to the existing predict-day CSV format and prepare history.
+.venv312/Scripts/python.exe -m utcgnn.workbook prepare --workbook data/UTC_Current_OCT30.xlsx --sheet 103026 --date 2026-10-30 --output artifacts/oct30_evaluation
+
+# 2. Use the existing trained R-GCN to predict winners.
+.venv312/Scripts/python.exe -m utcgnn --matches artifacts/oct30_evaluation/history.csv predict-day --date 2026-10-30 --groups artifacts/oct30_evaluation/court_pairings.csv --output artifacts/oct30_evaluation/match_predictions.csv --unassigned-output artifacts/oct30_evaluation/unassigned_players.csv
+
+# 3. Fit the score classifier on the same earlier history and predict legal scores.
+.venv312/Scripts/python.exe -m utcgnn.score_prediction --predictions artifacts/oct30_evaluation/match_predictions.csv --matches artifacts/oct30_evaluation/history.csv --output artifacts/oct30_evaluation/score_predictions.csv --report artifacts/oct30_evaluation/score_report.json --workbook artifacts/oct30_evaluation/score_predictions.xlsx
+
+# 4. Only after prediction, compare against ACTUAL_103026.
+.venv312/Scripts/python.exe -m utcgnn.workbook evaluate --workbook data/UTC_Current_OCT30.xlsx --sheet ACTUAL_103026 --date 2026-10-30 --predictions artifacts/oct30_evaluation/score_predictions.csv --output artifacts/oct30_evaluation
+```
+
+`prepare` starts with `data/morphed_matches.csv` (override with `--matches`),
+removes target-date/future rows, and adds completed date-named workbook tabs
+strictly after the latest existing history date and before the prediction date.
+It ignores `ACTUAL_*` tabs. For this run it adds 21 October 17 sets; `102326`
+has no assigned courts. The result contains 3,498 accepted historical sets
+through October 17, with the existing 41 flagged rows still excluded by the
+prediction commands. It does not replace dates already covered by the base
+history. Existing history files and the source workbook are unchanged.
+
+The R-GCN checkpoint is reused without retraining. The separate score model is
+fitted on earlier history and conditioned on the R-GCN winner. Legal scores are
+6-0 through 6-4, 7-5 and 7-6, in either team orientation. `pairing` enumerates
+the three team splits; it does not assert the actual order of play.
+
+`evaluate` reconstructs actual teams from the two players sharing each set's
+score, checks legal scores and weekly totals, and matches by court and the two
+unordered teams. This handles different set ordering, partner ordering, and
+reversed team A/B orientation. Missing/duplicate matchups or inconsistent
+results raise an error rather than silently dropping sets. Actual results
+never enter the prediction history or score-model fitting for this date.
+
+Outputs under `artifacts/oct30_evaluation/` include `court_pairings.csv`,
+`history.csv`, `match_predictions.csv`, `score_predictions.csv`, the score
+workbook, `actual_matches.csv`, `match_comparison.csv`, `player_comparison.csv`,
+`court_performance.csv`, and `performance.json`. The match comparison retains
+probabilities, predicted and actual scores, correctness, and score errors.
+The player comparison includes predicted/actual games and wins, excluding
+attendance and sit-out awards.
+
+The October 30 run predicted **19/24 winners (79.17%)**, **6/24 exact scores
+(25.00%)**, and had **1.2708 games mean absolute error per team per set**.
+Log loss was **0.4208**, Brier score **0.1407**, and ROC-AUC **0.8672**.
+These describe one session, not evidence of general superiority. See
+[the aggregate results](reports/oct30_results.md) for court breakdowns and
+metric definitions. For another week, change the workbook, lineup sheet,
+actual sheet, date, and output directory in these commands.
+
 ## Graph and model
 
 Player nodes are joined to set-event nodes by four team-labeled participation
