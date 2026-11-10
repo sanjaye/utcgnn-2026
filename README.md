@@ -15,6 +15,10 @@ python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 ```
 
+On macOS, install `torch==2.9.1` without the `+cpu` suffix (that suffix only exists
+for Linux and Windows wheels). `xgboost` needs an OpenMP runtime there; torch ships
+one and is imported first, so no separate `brew install libomp` is needed.
+
 Put the two inputs under `data/` (already done locally). From the repository:
 
 ```bash
@@ -23,6 +27,15 @@ Put the two inputs under `data/` (already done locally). From the repository:
 /workspace/utcgnn-venv/bin/python -m utcgnn train --epochs 60
 # Optional: additional expanding-window tests, starting with three seasons.
 /workspace/utcgnn-venv/bin/python -m utcgnn train --epochs 60 --rolling --output artifacts/rolling
+# Concatenation team decoder instead of summing partners (writes artifacts/main_concat).
+/workspace/utcgnn-venv/bin/python -m utcgnn train --decoder concat
+# Average-pooling team decoder with a ReLU layer (writes artifacts/main_mean).
+/workspace/utcgnn-venv/bin/python -m utcgnn train --decoder mean
+# Proposal's player–set graph in PyTorch Geometric (R-GCN and GraphSAGE, 5 seeds);
+# runs on a GPU when available. Colab steps are in reports/experiments.md.
+/workspace/utcgnn-venv/bin/python -m utcgnn train-hetero
+# XGBoost baseline on the same features and splits; see reports/experiments.md.
+/workspace/utcgnn-venv/bin/python -m utcgnn xgboost
 /workspace/utcgnn-venv/bin/python -m utcgnn predict --date 2026-10-17 \
   --team-a P0002 P0074 --team-b P0009 P0063
 # Predict the 24 explicit matches (three pairings per court).
@@ -69,9 +82,17 @@ end-of-season totals, pseudonyms and future outcomes are excluded. There are no
 learned player-ID embeddings. Players with no history get the same defined prior
 (Elo 1500, win/game rates 0.5, zero sets/games), enabling registered cold starts.
 
-Team embeddings sum the two player embeddings. The proposal's linear decoder
+By default, team embeddings sum the two player embeddings. The proposal's linear decoder
 uses `wᵀ(z_A - z_B)`, fixing its intercept to zero. This enforces
-partner-order invariance and P(A beats B) = 1 - P(B beats A). Training uses BCE,
+partner-order invariance and P(A beats B) = 1 - P(B beats A). `train --decoder concat`
+instead concatenates the two partners' final embeddings (2d), applies a linear
+layer back to d, then a ReLU. The ReLU makes the team embedding nonlinear in the pair,
+so it can represent interactions between partners. Swapping teams still gives
+P(B beats A) = 1 - P(A beats B), but the two partner slots get separate weights, so
+partner order can change the prediction. `train --decoder mean` averages the two
+partners' embeddings, then applies a d-to-d linear layer and a ReLU. Partner order
+cannot matter, but the pair enters only through its average. Checkpoints record
+their decoder. Training uses BCE,
 Adam (0.005), weight decay 0.001, and full training-session gradient accumulation.
 Seed 42 and one CPU thread make the run reproducible on this software stack.
 Select the epoch by validation log loss; test labels never select weights.
@@ -97,6 +118,28 @@ on training data with swapped-team augmentation. The games baseline is a
 performance proxy, **not the official ladder-points baseline**: neither official
 points nor separate attendance awards are supplied.
 
+The `train-hetero` command implements the project proposal's graph with PyTorch
+Geometric (`utcgnn/hetero_data.py`, `hetero_models.py`, `hetero_experiment.py`). Each
+match date gets its own graph. Every earlier set is a node with the winner's and loser's
+games, weeks before that date, week of season and court (a ranking band: court 1 holds
+the top four players). Players link to these sets by won/lost edges in both directions.
+The date's own sets are target nodes with only week of season and court, receiving
+side A/B edges from their players and sending nothing. Set number is not used, since
+play order on a court is arbitrary. Four layers of `RGCNConv` (one weight matrix per
+edge type), or one `SAGEConv` per edge type combined with `HeteroConv`, produce the
+target embedding. Each target also exists as a copy with the sides swapped, and the
+logit is `f(h) - f(h_swapped)`, so P(A beats B) = 1 - P(B beats A) and partner order
+cannot matter. Training is full-batch with validation-selected epochs, over five seeds
+by default; `--device auto` uses a GPU when available. Handedness, availability,
+self-rating and weather from the proposal are not in the data.
+
+The separate `xgboost` command adds a gradient-boosted tree baseline on the same
+pre-session player features, splits and online protocol. Each team is summarized by
+the sum, min and max of its players' features, plus the team difference of sums.
+Hyperparameters are tuned by randomized search with 3-fold CV on the training seasons
+only, grouped by session date. Training uses swapped-team augmentation, and
+predictions average both team orders.
+
 All rows with nonempty `validation_flags` are excluded by default (41/3,518
 in the supplied data). This deliberately conservative policy also excludes
 potentially usable sets with weekly aggregate discrepancies. Structural errors
@@ -111,6 +154,15 @@ cold-start if any participant has no earlier accepted set. Single-class AUC
 and empty-subset metrics are null. Per-split prediction CSVs support auditing.
 Training traces, R-GCN/GraphSAGE checkpoints and player-strength CSVs are saved.
 `artifacts/graph/` contains player, event, participation and typed-edge CSVs.
+`train --decoder concat` writes the same files to `artifacts/main_concat/`, so it
+never replaces the main checkpoints. `xgboost` writes metrics, per-split predictions,
+CV results and feature importance to `artifacts/xgboost/`. `train-hetero` writes one
+checkpoint and training trace per seed, plus metrics (per seed and mean ± std) and
+predictions, to `artifacts/hetero_rgcn/` and `artifacts/hetero_sage/`.
+
+`train`, `train-hetero` and `xgboost` also update `reports/experiments.md`, a results log with one
+section per experiment compared against the main run (`--no-log` skips this). That
+file also explains how to run the experiments and add new ones.
 
 Player-strength logits compare each player plus the mean active-player partner
 against a team of two mean active-player embeddings. This is an explicit

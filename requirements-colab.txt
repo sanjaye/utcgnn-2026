@@ -1,0 +1,6 @@
+# Google Colab: install with `pip install -r requirements-colab.txt`.
+# Colab already provides a CUDA build of torch plus numpy, pandas and scikit-learn.
+# Do not install requirements.txt there: its torch==2.9.1+cpu pin would replace the
+# GPU build with a CPU-only one.
+torch_geometric==2.7.0
+openpyxl

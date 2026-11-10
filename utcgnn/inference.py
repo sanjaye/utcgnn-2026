@@ -19,7 +19,8 @@ def load_inference_context(players, matches, checkpoint_path, date, include_flag
     history = History(players)
     for _, rows in matches[matches.session < date].groupby('session', sort=True):
         history.update(rows)
-    model = GraphModel(kind=checkpoint['kind'])
+    # Checkpoints saved before the decoder option existed always used the sum decoder.
+    model = GraphModel(kind=checkpoint['kind'], decoder=checkpoint.get('decoder', 'sum'))
     model.load_state_dict(checkpoint['state_dict'])
     model.eval()
     return history, model, checkpoint

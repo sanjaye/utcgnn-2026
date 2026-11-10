@@ -9,3 +9,5 @@ data/sample
 data/templates
 !data/README.md
 artifacts/
+.DS_Store
+~*.xlsx

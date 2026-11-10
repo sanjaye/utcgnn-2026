@@ -1,3 +1,4 @@
+import copy
 import json
 import tempfile
 import unittest
@@ -12,6 +13,9 @@ from utcgnn.experiment import run_experiment
 from utcgnn.inference import load_inference_context, predict_teams
 from utcgnn.matchday import PAIRINGS, load_matchday_groups, load_name_registry, predict_matchday
 from utcgnn.models import GraphModel
+from utcgnn.reporting import log_markdown
+from utcgnn.xgboost_baseline import FEATURE_NAMES, design, symmetric_predict, team_features
+from xgboost import XGBClassifier
 
 
 def fixture():
@@ -68,13 +72,58 @@ class TemporalTests(unittest.TestCase):
         p,m = fixture()
         s,_ = snapshots(p,m)
         for kind in ['rgcn','sage']:
-            model = GraphModel(kind=kind)
-            g = s[-1]
-            a = model(g.x,g.relations,g.teams)
-            b = model(g.x,g.relations,g.teams[:,[1,0,3,2]])
-            c = model(g.x,g.relations,g.teams[:,[2,3,0,1]])
-            torch.testing.assert_close(a,b)
-            torch.testing.assert_close(a,-c)
+            for decoder in ['sum','concat','mean']:
+                model = GraphModel(kind=kind,decoder=decoder)
+                g = s[-1]
+                a = model(g.x,g.relations,g.teams)
+                b = model(g.x,g.relations,g.teams[:,[1,0,3,2]])
+                c = model(g.x,g.relations,g.teams[:,[2,3,0,1]])
+                # Swapping teams negates the logit for both decoders.
+                torch.testing.assert_close(a,-c)
+                # Swapping partners is a no-op for the order-invariant decoders.
+                if decoder in ('sum','mean'):
+                    torch.testing.assert_close(a,b)
+
+    def test_concat_decoder_trains_and_reloads(self):
+        p,m = fixture()
+        with tempfile.TemporaryDirectory() as tmp:
+            report = run_experiment(p,m,{'policy':'exclude_all_flagged'},tmp,epochs=2,decoder='concat')
+            self.assertEqual(report['decoder'],'concat')
+            history,model,checkpoint = load_inference_context(p,m,Path(tmp)/'rgcn.pt','2025-01-03',False)
+            self.assertEqual(model.decoder,'concat')
+            self.assertEqual(model.pair.in_features,2*model.pair.out_features)
+            probability = predict_teams(history,model,checkpoint,[['p1','p2','p3','p4']])[0]
+            self.assertTrue(0 <= probability <= 1)
+
+    def test_xgboost_predictions_are_team_symmetric(self):
+        p,m = fixture()
+        s,_ = snapshots(p,m)
+        g = s[-1]
+        a,b = team_features(g)
+        self.assertEqual(design(a,b).shape[1],len(FEATURE_NAMES))
+        flipped = copy.copy(g)
+        flipped.teams = g.teams[:,[1,0,3,2]]
+        fa,fb = team_features(flipped)
+        np.testing.assert_allclose(design(a,b),design(fa,fb))
+        rng = np.random.default_rng(0)
+        model = XGBClassifier(n_estimators=10,max_depth=2,random_state=0).fit(
+            rng.normal(size=(200,len(FEATURE_NAMES))),rng.integers(0,2,200))
+        ta,tb = rng.normal(size=(20,15)),rng.normal(size=(20,15))
+        np.testing.assert_allclose(symmetric_predict(model,ta,tb),1-symmetric_predict(model,tb,ta),rtol=1e-6)
+
+    def test_results_log_replaces_only_its_section(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp)/'log.md'
+            path.write_text('# Log\n')
+            log_markdown(path,'one','first')
+            log_markdown(path,'two','other')
+            log_markdown(path,'one','second')
+            text = path.read_text()
+            self.assertEqual(text.count('results:one:start'),1)
+            self.assertIn('second',text)
+            self.assertNotIn('first',text)
+            self.assertIn('other',text)
+            self.assertTrue(text.startswith('# Log'))
 
     def test_matchday_predicts_all_pairings_with_both_names(self):
         ids = [f'p{i:02}' for i in range(32)]

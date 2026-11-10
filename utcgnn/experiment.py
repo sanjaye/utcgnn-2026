@@ -43,14 +43,15 @@ def probabilities(model, sessions, mean, scale):
                                for s in sessions])
 
 
-def train_graph(kind, train, validation, epochs, seed):
+def train_graph(kind, train, validation, epochs, seed, decoder='sum'):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.set_num_threads(1)
     all_x = torch.cat([s.x for s in train])
     mean, scale = all_x.mean(0), all_x.std(0).clamp(min=.1)
-    model = GraphModel(kind=kind)
+    # decoder: 'sum' or 'concat' team embedding (see models.DECODERS).
+    model = GraphModel(kind=kind,decoder=decoder)
     opt = torch.optim.Adam(model.parameters(),lr=.005,weight_decay=1e-3)
     best, best_state, best_epoch = float('inf'), None, 0
     trace = []
@@ -74,22 +75,46 @@ def train_graph(kind, train, validation, epochs, seed):
     return model, mean, scale, best_epoch, trace
 
 
-def run_experiment(players, matches, audit, output, epochs=60, seed=42):
-    if epochs < 1:
-        raise ValueError('epochs must be positive')
-    out = Path(output)
-    out.mkdir(parents=True, exist_ok=True)
+def split_sessions(players, matches):
+    """Chronological season splits and their session snapshots, shared by every model."""
     seasons = season_splits(matches)
     sessions, history = snapshots(players,matches)
     splits = {'train':seasons[:-2], 'validation':[seasons[-2]], 'test':[seasons[-1]]}
     groups = {k:[s for s in sessions if s.season in v] for k,v in splits.items()}
+    return splits, groups, history
+
+
+def evaluate(y, p, cold):
+    """Overall, cold-start and established-player metrics for one split."""
+    result = metrics(y,p)
+    result['cold_start'] = metrics(y[cold],p[cold])
+    result['established'] = metrics(y[~cold],p[~cold])
+    return result
+
+
+def save_predictions(out, groups, preds):
+    """Per-split CSVs with one P(team A wins) column per model in preds[split]."""
+    for split,g in groups.items():
+        pd.DataFrame({'match_id':[i for s in g for i in s.ids],
+                      'session':[str(s.session.date()) for s in g for _ in s.ids],
+                      'team_a_win':np.concatenate([s.y.numpy() for s in g]).astype(int),
+                      'cold_start':np.concatenate([s.cold for s in g]),**preds[split]}).to_csv(
+                          Path(out)/f'{split}_predictions.csv',index=False)
+
+
+def run_experiment(players, matches, audit, output, epochs=60, seed=42, decoder='sum'):
+    if epochs < 1:
+        raise ValueError('epochs must be positive')
+    out = Path(output)
+    out.mkdir(parents=True, exist_ok=True)
+    splits, groups, history = split_sessions(players,matches)
     labels = {k:np.concatenate([s.y.numpy() for s in g]) for k,g in groups.items()}
     masks = {k:np.concatenate([s.cold for s in g]) for k,g in groups.items()}
     train_x = np.concatenate([feature_differences(s) for s in groups['train']])
     tabular = symmetric_classifier(train_x, labels['train'])
     point_x = np.concatenate([s.points for s in groups['train']])[:,None]
     point_model = symmetric_classifier(point_x, labels['train'])
-    report = {'seed':seed,'epochs_requested':epochs,'audit':audit,'splits':splits,
+    report = {'seed':seed,'epochs_requested':epochs,'decoder':decoder,'audit':audit,'splits':splits,
               'protocol':'Frozen model weights; session-batched online history updates after all predictions on a date. '
                          'Earlier validation/test results may inform later sessions, never the same session.',
               'features':FEATURES,'models':{},
@@ -100,12 +125,13 @@ def run_experiment(players, matches, audit, output, epochs=60, seed=42):
                   'historical_games':point_model.predict_proba(np.concatenate([s.points for s in g])[:,None])[:,1]}
              for split,g in groups.items()}
     for kind in ['rgcn','sage']:
-        model,mean,scale,best_epoch,trace = train_graph(kind,groups['train'],groups['validation'],epochs,seed)
+        model,mean,scale,best_epoch,trace = train_graph(kind,groups['train'],groups['validation'],epochs,seed,decoder)
         for split,g in groups.items():
             preds[split][kind] = probabilities(model,g,mean,scale)
         report['models'][kind] = {'selected_epoch':best_epoch}
         pd.DataFrame(trace).to_csv(out/f'{kind}_training.csv',index=False)
-        torch.save({'state_dict':model.state_dict(),'mean':mean,'scale':scale,'kind':kind,
+        # The decoder is saved so inference rebuilds the same architecture.
+        torch.save({'state_dict':model.state_dict(),'mean':mean,'scale':scale,'kind':kind,'decoder':decoder,
                     'player_ids':players.player_id.tolist(),
                     'include_flagged':audit['policy']=='include_flagged',
                     'selection_end':str(max(s.session for s in groups['validation']).date()),
@@ -115,8 +141,14 @@ def run_experiment(players, matches, audit, output, epochs=60, seed=42):
         with torch.no_grad():
             h = model.encode((history.features()-mean)/scale,history.relations())
             active = torch.tensor(history.sets>0)
-            neutral = h[active].mean(0)
-            strengths = (model.team_score(h+neutral)-model.team_score(2*neutral)).squeeze(-1).numpy()
+            neutral = h[active].mean(0).expand_as(h)
+
+            def team_logit(z1, z2):
+                return model.team_score(model.team_embedding(z1,z2)).squeeze(-1)
+
+            # Average the player in both partner slots, since the concat decoder weights slots
+            # differently. For 'sum' this equals the original score(h + n) - score(2n).
+            strengths = ((team_logit(h,neutral)+team_logit(neutral,h))/2-team_logit(neutral,neutral)).numpy()
         pd.DataFrame({'player_id':history.ids,'pseudonym':players.pseudonym,
                       'observed_sets':history.sets.astype(int),'elo':history.elo,
                       'contextual_strength_logit':strengths,
@@ -124,13 +156,7 @@ def run_experiment(players, matches, audit, output, epochs=60, seed=42):
                           out/f'{kind}_player_strength.csv',index=False)
     for split in groups:
         for name,p in preds[split].items():
-            entry = report['models'].setdefault(name,{})
-            entry[split] = metrics(labels[split],p)
-            entry[split]['cold_start'] = metrics(labels[split][masks[split]],p[masks[split]])
-            entry[split]['established'] = metrics(labels[split][~masks[split]],p[~masks[split]])
-        frame = pd.DataFrame({'match_id':[i for s in groups[split] for i in s.ids],
-                              'session':[str(s.session.date()) for s in groups[split] for _ in s.ids],
-                              'team_a_win':labels[split].astype(int),'cold_start':masks[split],**preds[split]})
-        frame.to_csv(out/f'{split}_predictions.csv',index=False)
+            report['models'].setdefault(name,{})[split] = evaluate(labels[split],p,masks[split])
+    save_predictions(out,groups,preds)
     (out/'metrics.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n')
     return report
