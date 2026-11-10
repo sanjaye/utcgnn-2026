@@ -52,6 +52,11 @@ def main():
     p.add_argument('--seed',type=int,default=42)
     p.add_argument('--log',default='reports/experiments.md',help='Markdown results log to update')
     p.add_argument('--no-log',action='store_true',help='Do not update the results log')
+    # Readable sample of the preprocessed GNN inputs (both graphs); needs PyG for the hetero part.
+    p = commands.add_parser('sample-inputs',help='Save the model inputs for a few sets to CSV/.pt files')
+    p.add_argument('--output',default='data/sample_model_inputs')
+    p.add_argument('--n',type=int,default=10,help='Number of sets, taken from the first date of --split')
+    p.add_argument('--split',choices=['train','validation','test'],default='validation')
     p = commands.add_parser('predict')
     p.add_argument('--checkpoint',default='artifacts/main/rgcn.pt')
     p.add_argument('--date',required=True,help='Session date, YYYY-MM-DD; use strictly earlier history')
@@ -105,6 +110,9 @@ def main():
                           'cv_log_loss':report['tuning']['best_cv_log_loss'],
                           **{split:{k:report['metrics'][split][k] for k in ('accuracy','roc_auc','log_loss')}
                              for split in ('validation','test')}},indent=2))
+    elif args.command == 'sample-inputs':
+        from .sample_inputs import export_sample
+        print(json.dumps(export_sample(players,matches,args.output,args.n,args.split),indent=2))
     elif args.command == 'predict':
         h, model, checkpoint = load_inference_context(
             players, matches, args.checkpoint, args.date, args.include_flagged

@@ -160,6 +160,12 @@ CV results and feature importance to `artifacts/xgboost/`. `train-hetero` writes
 checkpoint and training trace per seed, plus metrics (per seed and mean ± std) and
 predictions, to `artifacts/hetero_rgcn/` and `artifacts/hetero_sage/`.
 
+Model inputs are built in memory on each run. `python -m utcgnn sample-inputs` saves a
+readable sample, the inputs for 10 sets of the first validation date for both graphs
+(raw and scaled node features, relation weights, past-set edges and the full `.pt`
+tensors), to `data/sample_model_inputs/`. Its README describes each file;
+`--n`, `--split` and `--output` change the sample.
+
 `train`, `train-hetero` and `xgboost` also update `reports/experiments.md`, a results log with one
 section per experiment compared against the main run (`--no-log` skips this). That
 file also explains how to run the experiments and add new ones.
