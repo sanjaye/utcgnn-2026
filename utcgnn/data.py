@@ -12,7 +12,8 @@ FEATURES = ['log_sets', 'smoothed_win_rate', 'game_share', 'elo_scaled', 'log_ga
 
 
 def load_data(players_path, matches_path, include_flagged=False):
-    players = pd.read_excel(players_path, dtype={'player_id': str})
+    reader = pd.read_csv if Path(players_path).suffix.lower() == '.csv' else pd.read_excel
+    players = reader(players_path, dtype={'player_id': str})
     matches = pd.read_csv(matches_path, encoding='utf-8-sig')
     for frame, columns in [(players, ['player_id', 'pseudonym']),
                            (matches, ['match_id', 'season', 'timestamp', *SLOTS,

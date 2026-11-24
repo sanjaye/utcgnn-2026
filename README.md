@@ -128,6 +128,51 @@ These describe one session, not evidence of general superiority. See
 metric definitions. For another week, change the workbook, lineup sheet,
 actual sheet, date, and output directory in these commands.
 
+## Partner lift
+
+Build a historical report of partnerships that outperform individual-strength
+expectations, using the same pre-session doubles Elo baseline as the experiment:
+
+```powershell
+.venv312/Scripts/python.exe -m utcgnn.partner_lift
+# Report only recent results, while retaining earlier history to initialize Elo:
+.venv312/Scripts/python.exe -m utcgnn.partner_lift --since 2026-01-01 --before 2026-10-11 --output artifacts/partner_lift_2026
+```
+
+Open `artifacts/partner_lift/report.html` to search either partner by name or ID
+and change the minimum shared-set filter. The default view requires 10 eligible
+sets together. `partner_lift.csv` contains all eligible partnerships, including
+smaller samples; `player_partners.csv` presents the same pair estimate from
+each player's perspective. `match_expectations.csv` audits every accepted set
+in the report window, its pre-date expectation, and eligibility.
+`summary.json` records settings, source counts and baseline calibration checks.
+Inputs and generated outputs remain local; no source files are changed.
+
+Raw lift is actual win rate minus expected win rate, in percentage points.
+Adjusted lift estimates a constant pair log-odds offset with a normal prior
+centered on zero (standard deviation 0.75), then converts it to probability
+lift over the pair's historical schedule. The prior shrinks sparse results
+toward zero. A symmetric calibration rescales Elo log-odds using only earlier
+eligible results (minimum 100). It chooses a scale from 0.25 to 3 in steps of
+0.025 with a normal prior centered at 1 (standard deviation 0.5). Until enough
+history exists the scale is 1. Raw Elo probabilities and scales remain in the
+audit, and raw versus calibrated Brier scores appear in the report.
+The baseline has no explicit pair effect and uses only earlier
+dates. A set enters the report only after all four players have at least 12
+earlier sets; warm-up sets still update Elo. Override with `--min-prior-sets`,
+`--min-pair-sets`, or `--prior-sd` (greater than zero, at most 2).
+Flagged source rows are excluded. The default source is
+`data/morphed_matches.csv`; use `--matches` for another compatible history.
+Names and registration come from `data/players.csv` (`--players` to override).
+
+The 95% credible intervals condition on Elo, the chosen prior, and independent
+set outcomes. They omit rating uncertainty and session dependence and do not
+correct for multiple comparisons. Interpret lift as descriptive performance
+relative to this baseline, not causal chemistry or a guaranteed future edge.
+Opposing-pair effects, player form, and rating errors can contribute. Historical
+Elo can also absorb some recurring partnership effects. Pair estimates are
+identical for both partners and should not be summed as independent evidence.
+
 ## Graph and model
 
 Player nodes are joined to set-event nodes by four team-labeled participation
