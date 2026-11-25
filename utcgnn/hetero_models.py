@@ -1,4 +1,4 @@
-"""PyTorch Geometric R-GCN and GraphSAGE on the player–set graph (see hetero_data.py).
+"""PyTorch Geometric R-GCN, GraphSAGE and GATv2 on the player–set graph (see hetero_data.py).
 
 Forward pass for one batch of match-date graphs:
     1. Input layers: one Linear + ReLU per node type, mapping every node to `hidden` numbers.
@@ -8,6 +8,14 @@ Forward pass for one batch of match-date graphs:
                edge type is averaged separately, then the results are summed with a
                self term.
          sage: HeteroConv with one SAGEConv per edge type, results summed per node type.
+         gat:  HeteroConv with one GATv2Conv per edge type, results summed per node type,
+               plus a per-node-type self term W_self x. Each edge type has its own attention,
+               so a player weights its won_by and lost_by past sets separately (e.g. by
+               recency, which past-set nodes carry as weeks_before) instead of a plain mean.
+               GATv2Conv uses only neighbors, so the self term keeps a node's own features,
+               which matters for cold-start players with no incoming edges. Attention
+               dropout is 0: a random attention mask would differ between a target's real
+               and swapped copies and break the exact swap symmetry during training.
     3. Swap readout: each target exists as a real copy (h) and a swapped copy (h~),
        and logit = f(h) - f(h~), with the same small MLP f for both. Listing the teams
        the other way round exchanges h and h~, so the logit flips sign and
@@ -15,15 +23,15 @@ Forward pass for one batch of match-date graphs:
 """
 import torch
 from torch import nn
-from torch_geometric.nn import HeteroConv, RGCNConv, SAGEConv
+from torch_geometric.nn import GATv2Conv, HeteroConv, RGCNConv, SAGEConv
 
 from .hetero_data import EDGE_TYPES, NODE_FEATURES, NODE_TYPES
 
-KINDS = ('rgcn', 'sage')
+KINDS = ('rgcn', 'sage', 'gat')
 
 
 class PlayerSetGNN(nn.Module):
-    def __init__(self, kind='rgcn', hidden=32, layers=4, dropout=0.1):
+    def __init__(self, kind='rgcn', hidden=32, layers=4, dropout=0.1, heads=4):
         super().__init__()
         if kind not in KINDS:
             raise ValueError(kind)
@@ -34,10 +42,19 @@ class PlayerSetGNN(nn.Module):
         if kind == 'rgcn':
             self.convs = nn.ModuleList([
                 RGCNConv(hidden, hidden, num_relations=len(EDGE_TYPES), aggr='mean') for _ in range(layers)])
-        else:
+        elif kind == 'sage':
             self.convs = nn.ModuleList([
                 HeteroConv({et: SAGEConv((hidden, hidden), hidden) for et in EDGE_TYPES}, aggr='sum')
                 for _ in range(layers)])
+        else:
+            # Heads are averaged (concat=False), so every layer still outputs `hidden` numbers.
+            # Self-loops are undefined here: every edge type joins two different node types.
+            self.convs = nn.ModuleList([
+                HeteroConv({et: GATv2Conv((hidden, hidden), hidden, heads=heads, concat=False,
+                                          add_self_loops=False, dropout=0.0) for et in EDGE_TYPES}, aggr='sum')
+                for _ in range(layers)])
+            self.self_terms = nn.ModuleList([
+                nn.ModuleDict({t: nn.Linear(hidden, hidden, bias=False) for t in NODE_TYPES}) for _ in range(layers)])
         # Stage 3: f, shared by the real and swapped copies of every target.
         self.head = nn.Sequential(nn.Linear(hidden, hidden), nn.ReLU(), nn.Linear(hidden, 1))
 
@@ -77,8 +94,11 @@ class PlayerSetGNN(nn.Module):
             if self.kind == 'rgcn':
                 x = conv(torch.cat([x_dict[t] for t in NODE_TYPES]), edge_index, edge_type)
                 x_dict = dict(zip(NODE_TYPES, torch.relu(x).split(sizes)))
-            else:
+            elif self.kind == 'sage':
                 x_dict = {t: torch.relu(x) for t, x in conv(x_dict, edge_index_dict).items()}
+            else:
+                out = conv(x_dict, edge_index_dict)
+                x_dict = {t: torch.relu(out[t] + self.self_terms[i][t](x_dict[t])) for t in NODE_TYPES}
             if i < len(self.convs) - 1:
                 x_dict = self._drop(x_dict, role)
         return x_dict

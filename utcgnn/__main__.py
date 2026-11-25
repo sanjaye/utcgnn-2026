@@ -33,23 +33,32 @@ def main():
     p.add_argument('--rolling',action='store_true',help='Also evaluate earlier expanding-window season folds')
     # Player–set graph from the project proposal, built with PyTorch Geometric (imported
     # only for this command, so the other commands do not need it installed).
-    p = commands.add_parser('train-hetero',help='PyG R-GCN / GraphSAGE on the player-set graph, over several seeds')
-    p.add_argument('--models',nargs='+',choices=['rgcn','sage'],default=['rgcn','sage'])
+    p = commands.add_parser('train-hetero',help='PyG R-GCN / GraphSAGE / GATv2 on the player-set graph, over several seeds')
+    p.add_argument('--models',nargs='+',choices=['rgcn','sage','gat'],default=['rgcn','sage'])
     p.add_argument('--seeds',type=int,default=5,help='Number of seeds, starting at --seed')
     p.add_argument('--seed',type=int,default=42)
     p.add_argument('--epochs',type=int,default=200)
     p.add_argument('--hidden',type=int,default=32)
     p.add_argument('--layers',type=int,default=4)
+    p.add_argument('--heads',type=int,default=4,help='Attention heads for --models gat')
     p.add_argument('--dropout',type=float,default=0.1)
     p.add_argument('--device',default='auto',help="'auto' (GPU if available), 'cuda' or 'cpu'")
-    p.add_argument('--output',default=None,help='Default: artifacts/hetero_<model>')
+    p.add_argument('--task',choices=['win','score'],default='win',
+                   help="'win' (Task 1, P(A wins)) or 'score' (Task 2, team A's share of games)")
+    p.add_argument('--output',default=None,help='Default: artifacts/hetero_<model>, or artifacts/hetero_<model>_score')
     p.add_argument('--log',default='reports/experiments.md',help='Markdown results log to update')
     p.add_argument('--no-log',action='store_true',help='Do not update the results log')
     p = commands.add_parser('xgboost',help='XGBoost baseline on the same features and splits, tuned by CV on train')
-    p.add_argument('--output',default='artifacts/xgboost')
+    p.add_argument('--task',choices=['win','score'],default='win',
+                   help="'win' (Task 1) or 'score' (Task 2, team A's share of games)")
+    p.add_argument('--output',default=None,help='Default: artifacts/xgboost, or artifacts/xgboost_score')
     p.add_argument('--n-iter',type=int,default=60,help='Randomized-search candidates')
     p.add_argument('--cv-folds',type=int,default=3)
     p.add_argument('--seed',type=int,default=42)
+    p.add_argument('--log',default='reports/experiments.md',help='Markdown results log to update')
+    p.add_argument('--no-log',action='store_true',help='Do not update the results log')
+    p = commands.add_parser('score-baselines',help="Task 2: constant 0.5 and logistic regression on team A's game share")
+    p.add_argument('--output',default='artifacts/score_baselines')
     p.add_argument('--log',default='reports/experiments.md',help='Markdown results log to update')
     p.add_argument('--no-log',action='store_true',help='Do not update the results log')
     # Readable sample of the preprocessed GNN inputs (both graphs); needs PyG for the hetero part.
@@ -92,17 +101,29 @@ def main():
         from .hetero_experiment import run_hetero
         command = ' '.join(['python -m utcgnn',*sys.argv[1:]])
         for kind in args.models:
-            report = run_hetero(players,matches,audit,args.output or f'artifacts/hetero_{kind}',kind,
+            suffix = '_score' if args.task == 'score' else ''
+            report = run_hetero(players,matches,audit,args.output or f'artifacts/hetero_{kind}{suffix}',kind,
                                 seeds=tuple(range(args.seed,args.seed+args.seeds)),epochs=args.epochs,
                                 hidden=args.hidden,layers=args.layers,dropout=args.dropout,device=args.device,
-                                log_path=None if args.no_log else args.log,command=command)
-            print(json.dumps({'model':f'hetero_{kind}','device':report['device'],
+                                log_path=None if args.no_log else args.log,command=command,task=args.task,
+                                heads=args.heads)
+            print(json.dumps({'model':report['model'] if args.task == 'score' else f'hetero_{kind}','device':report['device'],
                               'runtime_seconds':report['runtime_seconds'],
                               'selected_epochs':report['selected_epochs'],
                               **{s:{k:v['mean'] for k,v in report['summary'][s].items()}
                                  for s in ('validation','test')}},indent=2))
+    elif args.command == 'xgboost' and args.task == 'score':
+        from .xgboost_baseline import run_xgboost_score
+        output = args.output or 'artifacts/xgboost_score'
+        report = run_xgboost_score(players,matches,audit,output,args.n_iter,args.cv_folds,args.seed,
+                                   log_path=None if args.no_log else args.log,
+                                   command=' '.join(['python -m utcgnn',*sys.argv[1:]]))
+        print(json.dumps({'output':output,'best_params':report['tuning']['best_params'],
+                          'cv_mae_games':report['tuning']['best_cv_mae_games'],
+                          **{split:report['rows']['XGBoost'][split] for split in ('validation','test')}},indent=2))
     elif args.command == 'xgboost':
         from .xgboost_baseline import run_xgboost
+        args.output = args.output or 'artifacts/xgboost'
         report = run_xgboost(players,matches,audit,args.output,args.n_iter,args.cv_folds,args.seed,
                              log_path=None if args.no_log else args.log,
                              command=' '.join(['python -m utcgnn',*sys.argv[1:]]))
@@ -110,6 +131,11 @@ def main():
                           'cv_log_loss':report['tuning']['best_cv_log_loss'],
                           **{split:{k:report['metrics'][split][k] for k in ('accuracy','roc_auc','log_loss')}
                              for split in ('validation','test')}},indent=2))
+    elif args.command == 'score-baselines':
+        from .score import run_score_baselines
+        report = run_score_baselines(players,matches,audit,args.output,log_path=None if args.no_log else args.log,
+                                     command=' '.join(['python -m utcgnn',*sys.argv[1:]]))
+        print(json.dumps({'output':args.output,**report['rows']},indent=2))
     elif args.command == 'sample-inputs':
         from .sample_inputs import export_sample
         print(json.dumps(export_sample(players,matches,args.output,args.n,args.split),indent=2))

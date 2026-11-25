@@ -83,7 +83,7 @@ class HeteroGraphTests(unittest.TestCase):
         partners = m.copy()
         partners[['team_a_1', 'team_a_2']] = m[['team_a_2', 'team_a_1']].to_numpy()
         reordered = Batch.from_data_list(graphs_for(p, partners))
-        for kind in ('rgcn', 'sage'):
+        for kind in ('rgcn', 'sage', 'gat'):
             torch.manual_seed(0)
             model = PlayerSetGNN(kind, hidden=8, layers=4, dropout=0.5)
             for mode in ('eval', 'train'):  # train mode: dropout masks are shared by both copies
@@ -97,11 +97,24 @@ class HeteroGraphTests(unittest.TestCase):
             model.eval()
             torch.testing.assert_close(model(listed), model(reordered))  # partner order is irrelevant
 
+    def test_gat_keeps_cold_start_player_features(self):
+        # GATv2Conv uses only neighbors; the self term must carry a player with no edges.
+        p, m = fixture()
+        g = graphs_for(p, m)[0]  # first date: no past sets, so no incoming player edges
+        self.assertEqual(g['past_set'].num_nodes, 0)
+        torch.manual_seed(0)
+        model = PlayerSetGNN('gat', hidden=8, layers=2, dropout=0.0).eval()
+        players = model.encode(Batch.from_data_list([g]))['player']
+        self.assertTrue((players.abs().sum(1) > 0).all())
+        other = g.clone()
+        other['player'].x = other['player'].x + 1
+        self.assertFalse(torch.allclose(players, model.encode(Batch.from_data_list([other]))['player']))
+
     def test_run_writes_metrics_and_predictions(self):
         p, m = fixture()
         audit = {'policy': 'exclude_all_flagged', 'used_sets': len(m)}
         with tempfile.TemporaryDirectory() as tmp:
-            for kind in ('rgcn', 'sage'):
+            for kind in ('rgcn', 'sage', 'gat'):
                 report = run_hetero(p, m, audit, tmp, kind, seeds=(1, 2), epochs=3, hidden=8, layers=2,
                                     device='cpu', log_path=Path(tmp) / 'log.md', reference_path=Path(tmp) / 'none.json')
                 self.assertEqual(report['summary']['test']['log_loss']['mean'] is not None, True)

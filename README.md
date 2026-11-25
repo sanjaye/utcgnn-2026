@@ -36,6 +36,10 @@ Put the two inputs under `data/` (already done locally). From the repository:
 /workspace/utcgnn-venv/bin/python -m utcgnn train-hetero
 # XGBoost baseline on the same features and splits; see reports/experiments.md.
 /workspace/utcgnn-venv/bin/python -m utcgnn xgboost
+# Task 2 (team A's share of games): baselines, XGBoost and the player–set GNNs.
+/workspace/utcgnn-venv/bin/python -m utcgnn score-baselines
+/workspace/utcgnn-venv/bin/python -m utcgnn xgboost --task score
+/workspace/utcgnn-venv/bin/python -m utcgnn train-hetero --task score
 /workspace/utcgnn-venv/bin/python -m utcgnn predict --date 2026-10-17 \
   --team-a P0002 P0074 --team-b P0009 P0063
 # Predict the 24 explicit matches (three pairings per court).
@@ -129,7 +133,11 @@ play order on a court is arbitrary. Four layers of `RGCNConv` (one weight matrix
 edge type), or one `SAGEConv` per edge type combined with `HeteroConv`, produce the
 target embedding. Each target also exists as a copy with the sides swapped, and the
 logit is `f(h) - f(h_swapped)`, so P(A beats B) = 1 - P(B beats A) and partner order
-cannot matter. Training is full-batch with validation-selected epochs, over five seeds
+cannot matter. `--models gat` adds a third encoder: `HeteroConv` with one `GATv2Conv` per
+edge type (4 heads averaged, no attention dropout so the swap symmetry stays exact in
+training) plus a learned self term per node type, so a player attends over its won/lost
+past sets instead of averaging them, and cold-start players keep their own features.
+Training is full-batch with validation-selected epochs, over five seeds
 by default; `--device auto` uses a GPU when available. Handedness, availability,
 self-rating and weather from the proposal are not in the data.
 
@@ -145,6 +153,27 @@ in the supplied data). This deliberately conservative policy also excludes
 potentially usable sets with weekly aggregate discrepancies. Structural errors
 (unknown/duplicate players, duplicate IDs, missing fields, invalid scores/labels)
 fail validation before exclusion; `--include-flagged` never bypasses them.
+
+## Task 2: game share and standings
+
+Task 2 predicts team A's share of games in a set, `a / (a + b)`, scored by MAE in games,
+`|predicted share − share| × (a + b)`. No new architecture is used: every Task 1 model
+already outputs an antisymmetric logit, and `sigmoid(logit)` is read as the share, so
+share(B) = 1 − share(A). Models are trained on the binomial likelihood of the games
+(BCE with the soft label `share`, weighted by games in the set) and selected by validation
+MAE in games (`utcgnn/score.py`). `score-baselines` fits a constant 0.5 and a binomial
+logistic regression on the team feature differences; `xgboost --task score` uses
+`reg:logistic` on the Task 1 XGBoost features, tuned by MAE in games with date-grouped CV;
+`train-hetero --task score` trains the same player–set R-GCN and GraphSAGE.
+
+A player's expected points over a split are the sum of their side's predicted share times
+the games in each of their sets. They are compared with performance-only standings (actual
+games won) by Spearman ρ over players with at least 5 sets: **total** (primary) and **per
+set** (secondary: both divided by games played, i.e. expected vs actual share of games,
+which removes attendance and set length). Total ρ is high even for the constant model,
+because attendance drives both totals. Outputs go to `artifacts/score_baselines`,
+`artifacts/xgboost_score` and `artifacts/hetero_<model>_score`, including per-split
+`*_standings.csv` files; results go to the Task 2 sections of `reports/experiments.md`.
 
 ## Outputs and limits
 

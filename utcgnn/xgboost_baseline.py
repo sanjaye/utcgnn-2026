@@ -21,12 +21,14 @@ import numpy as np
 import pandas as pd
 import torch  # noqa: F401  Loaded before xgboost so its bundled OpenMP runtime serves xgboost on macOS.
 from scipy.stats import loguniform, randint, uniform
-from sklearn.model_selection import GroupKFold, RandomizedSearchCV
-from xgboost import XGBClassifier
+from sklearn.model_selection import GroupKFold, ParameterSampler, RandomizedSearchCV
+from xgboost import XGBClassifier, XGBRegressor
 
 from .data import FEATURES
 from .experiment import evaluate, save_predictions, split_sessions
 from .reporting import log_markdown, metrics_table, reference_models
+from .score import (evaluate_score, flat, log_score, mae_games, report_base, save_score_outputs, score_table,
+                    score_targets)
 
 AGGREGATES = ('sum', 'min', 'max')
 FEATURE_NAMES = ([f'team_a_{agg}_{f}' for agg in AGGREGATES for f in FEATURES]
@@ -60,8 +62,12 @@ def design(team_a, team_b):
 
 
 def symmetric_predict(model, team_a, team_b):
-    forward = model.predict_proba(design(team_a, team_b))[:, 1]
-    swapped = model.predict_proba(design(team_b, team_a))[:, 1]
+    """P(A wins) for a classifier, or A's game share for a reg:logistic regressor."""
+    if hasattr(model, 'predict_proba'):
+        forward = model.predict_proba(design(team_a, team_b))[:, 1]
+        swapped = model.predict_proba(design(team_b, team_a))[:, 1]
+    else:
+        forward, swapped = model.predict(design(team_a, team_b)), model.predict(design(team_b, team_a))
     return (forward + 1 - swapped) / 2
 
 
@@ -141,4 +147,84 @@ Train: accuracy {results['train']['accuracy']:.4f}, ROC-AUC {results['train']['r
 {note} All results are from a single seed and a single test season.
 """
         log_markdown(log_path, 'xgboost', body)
+    return report
+
+
+def _fit_share(params, a, b, share, games, seed):
+    """reg:logistic on the share, weighted by games (the binomial likelihood), swap-augmented."""
+    model = XGBRegressor(objective='reg:logistic', tree_method='hist', n_jobs=-1, random_state=seed, **params)
+    model.fit(np.concatenate([design(a, b), design(b, a)]), np.concatenate([share, 1 - share]),
+              sample_weight=np.concatenate([games, games]))
+    return model
+
+
+def run_xgboost_score(players, matches, audit, output, n_iter=60, cv_folds=3, seed=42,
+                      log_path='reports/experiments.md', command=None):
+    """Task 2: XGBoost predicting team A's game share; tuned by MAE in games with grouped CV on train."""
+    out = Path(output)
+    out.mkdir(parents=True, exist_ok=True)
+    splits, groups, _ = split_sessions(players, matches)
+    targets = score_targets(matches, groups)
+    teams = {split: _stack(g) for split, g in groups.items()}
+    n_players = len(players)
+
+    # Randomized search done by hand, so each fold is scored by MAE in games on its
+    # original (unswapped) sets with symmetric predictions, exactly as reported.
+    t = targets['train']
+    a, b = teams['train']
+    dates = np.array(t['session'])
+    folds = list(GroupKFold(n_splits=cv_folds).split(a, groups=dates))
+    candidates = list(ParameterSampler(SEARCH_SPACE, n_iter, random_state=seed))
+    rows = []
+    for i, params in enumerate(candidates):
+        params = {k: (int(v) if isinstance(v, (int, np.integer)) else float(v)) for k, v in params.items()}
+        scores = []
+        for fit_idx, held_idx in folds:
+            sub = {k: t[k][fit_idx] for k in ('share', 'games')}
+            model = _fit_share(params, a[fit_idx], b[fit_idx], sub['share'], sub['games'], seed)
+            held = {k: t[k][held_idx] for k in ('share', 'games')}
+            scores.append(mae_games(held, symmetric_predict(model, a[held_idx], b[held_idx])))
+        rows.append({'candidate': i, 'mean_mae_games': float(np.mean(scores)),
+                     'std_mae_games': float(np.std(scores)), **params})
+    cv = pd.DataFrame(rows).sort_values('mean_mae_games')
+    cv.to_csv(out / 'cv_results.csv', index=False)
+    best = cv.iloc[0]
+    best_params = {k: (int(best[k]) if k in ('n_estimators', 'max_depth') else float(best[k])) for k in SEARCH_SPACE}
+    model = _fit_share(best_params, a, b, t['share'], t['games'], seed)
+
+    preds = {split: {'xgboost': symmetric_predict(model, *teams[split])} for split in groups}
+    results = {split: evaluate_score(targets[split], preds[split]['xgboost'], n_players) for split in groups}
+    importance = pd.DataFrame({'feature': FEATURE_NAMES, 'gain': model.feature_importances_})
+    importance = importance.sort_values('gain', ascending=False)
+    importance.to_csv(out / 'feature_importance.csv', index=False)
+    save_score_outputs(out, targets, preds, players.player_id.tolist())
+    run_at = datetime.now().strftime('%Y-%m-%d %H:%M')
+    report = {**report_base(splits, audit, targets, n_players), 'model': 'xgboost_score', 'run_at': run_at,
+              'seed': seed, 'features': FEATURE_NAMES,
+              'tuning': {'method': 'ParameterSampler + GroupKFold by session date', 'n_iter': n_iter, 'cv_folds': cv_folds,
+                         'scoring': 'MAE in games on held-out sets, symmetric predictions',
+                         'best_cv_mae_games': float(best.mean_mae_games), 'cv_mae_games_std': float(best.std_mae_games),
+                         'best_params': best_params},
+              'metrics': results, 'rows': {'XGBoost': {s: flat(results[s]) for s in groups}}}
+    (out / 'metrics.json').write_text(json.dumps(report, indent=2, allow_nan=False) + '\n')
+
+    if log_path:
+        params = ', '.join(f'`{k}={v:.4g}`' if isinstance(v, float) else f'`{k}={v}`' for k, v in best_params.items())
+        top = ', '.join(f'`{f}`' for f in importance.feature.head(8))
+        r = results
+        body = f"""
+### Task 2 XGBoost (`utcgnn/xgboost_baseline.py`)
+
+Last run: {run_at} · `{command or 'python -m utcgnn xgboost --task score'}` · outputs in `{out}`
+
+- **Target:** team A's share of games. `XGBRegressor(objective='reg:logistic')` on the share, weighted by games in the set; same 35 team features as the Task 1 XGBoost. Teams are swapped in training and predictions average both orientations, so share(B) = 1 − share(A).
+- **Tuning:** {n_iter} random candidates from the Task 1 search space, {cv_folds}-fold CV on training seasons only, grouped by session date, scored by MAE in games. Best CV MAE {best.mean_mae_games:.4f} ± {best.std_mae_games:.4f} games.
+- **Selected hyperparameters:** {params}
+- **Top features by gain:** {top}
+
+{score_table(report['rows'])}
+
+Train MAE {r['train']['mae_games']:.4f} games. RMSE (games): validation {r['validation']['rmse_games']:.4f}, test {r['test']['rmse_games']:.4f}. Single seed, single test season.
+"""
+        log_score(log_path, 'score_xgboost', body, report)
     return report
